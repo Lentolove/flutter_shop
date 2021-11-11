@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tsp.flutter_shop">
-   <application
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <application
         android:label="flutter_shop"
         android:icon="@mipmap/ic_launcher">
         <activity

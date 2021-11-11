@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/view_model/tab_home_view_model.dart';
 
 /// home 首页
 class TabHomePage extends StatefulWidget {
@@ -10,9 +11,13 @@ class TabHomePage extends StatefulWidget {
 
 class _TabHomePageState extends State<TabHomePage> with SingleTickerProviderStateMixin{
 
+  TabHomeViewModel _model = TabHomeViewModel();
+
+
   @override
   void initState() {
     print("TabHomePage  initState");
+    _model.loadTabHomeData();
     super.initState();
   }
 
