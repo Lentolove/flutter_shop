@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shop/constant/app_colors.dart';
+import 'package:flutter_shop/constant/app_dimens.dart';
 import 'package:flutter_shop/ui/page/tab_car_page.dart';
 import 'package:flutter_shop/ui/page/tab_category_page.dart';
 import 'package:flutter_shop/ui/page/tab_mine_page.dart';
@@ -33,6 +35,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+        BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width,
+            maxHeight: MediaQuery.of(context).size.height),
+        designSize: const Size(1080, 1920),
+        orientation: Orientation.portrait);
+
     return Scaffold(
       //IndexedStack 的使用：https://juejin.cn/post/6973534234233274404
       body: IndexedStack(

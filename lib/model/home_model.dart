@@ -14,7 +14,7 @@ class HomeModel {
   List<CouponList>? couponList;
   List<Channel>? channel;
   List<HomeModelGrouponlist>? grouponList;
-  List<Banner>? banner;
+  List<HomeBanner>? banner;
   List<BrandList>? brandList;
   List<HotGoodsList>? hotGoodsList;
   List<TopicList>? topicList;
@@ -59,7 +59,7 @@ class HomeModel {
     if (json['banner'] != null) {
       banner = [];
       json['banner'].forEach((v) {
-        banner?.add(Banner.fromJson(v));
+        banner?.add(HomeBanner.fromJson(v));
       });
     }
     if (json['brandList'] != null) {
@@ -402,8 +402,8 @@ class BrandList {
 /// updateTime : "2018-02-01 00:00:00"
 /// deleted : false
 
-class Banner {
-  Banner({
+class HomeBanner {
+  HomeBanner({
       this.id, 
       this.name, 
       this.link, 
@@ -415,7 +415,7 @@ class Banner {
       this.updateTime, 
       this.deleted,});
 
-  Banner.fromJson(dynamic json) {
+  HomeBanner.fromJson(dynamic json) {
     id = json['id'];
     name = json['name'];
     link = json['link'];

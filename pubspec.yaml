@@ -38,6 +38,24 @@ dependencies:
   #网络请求
   dio: ^4.0.1
 
+  #下拉刷新
+  pull_to_refresh: ^2.0.0
+
+  #对 InheritedWidget 组件的上层封装，使其更易用，更易复用。: https://github.com/rrousselGit/provider/blob/master/resources/translations/zh-CN/README.md
+  provider: ^6.0.1
+
+  #屏幕工具类
+  flutter_screenutil: ^5.0.0+2
+
+  #banner
+  flutter_swiper: ^1.1.6
+
+  #带缓存的Image
+  cached_network_image: ^3.0.0
+
+  #弹吐司
+  fluttertoast: ^8.0.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -61,9 +79,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
