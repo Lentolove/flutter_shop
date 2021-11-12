@@ -10,13 +10,13 @@
 
 class HomeModel {
 
-  List<NewGoodsList>? newGoodsList;
+  List<GoodsList>? newGoodsList;
   List<CouponList>? couponList;
   List<Channel>? channel;
   List<HomeModelGrouponlist>? grouponList;
   List<HomeBanner>? banner;
   List<BrandList>? brandList;
-  List<HotGoodsList>? hotGoodsList;
+  List<GoodsList>? hotGoodsList;
   List<TopicList>? topicList;
   List<FloorGoodsList>? floorGoodsList;
 
@@ -35,7 +35,7 @@ class HomeModel {
     if (json['newGoodsList'] != null) {
       newGoodsList = [];
       json['newGoodsList'].forEach((v) {
-        newGoodsList?.add(NewGoodsList.fromJson(v));
+        newGoodsList?.add(GoodsList.fromJson(v));
       });
     }
     if (json['couponList'] != null) {
@@ -71,7 +71,7 @@ class HomeModel {
     if (json['hotGoodsList'] != null) {
       hotGoodsList = [];
       json['hotGoodsList'].forEach((v) {
-        hotGoodsList?.add(HotGoodsList.fromJson(v));
+        hotGoodsList?.add(GoodsList.fromJson(v));
       });
     }
     if (json['topicList'] != null) {
@@ -298,60 +298,6 @@ class TopicList {
 
 }
 
-/// id : 1006013
-/// name : "双宫茧桑蚕丝被 空调被"
-/// brief : "一级桑蚕丝，吸湿透气柔软"
-/// picUrl : "http://yanxuan.nosdn.127.net/583812520c68ca7995b6fac4c67ae2c7.png"
-/// isNew : false
-/// isHot : true
-/// counterPrice : 719
-/// retailPrice : 699
-
-class HotGoodsList {
-  HotGoodsList({
-      this.id, 
-      this.name, 
-      this.brief, 
-      this.picUrl, 
-      this.isNew, 
-      this.isHot, 
-      this.counterPrice, 
-      this.retailPrice,});
-
-  HotGoodsList.fromJson(dynamic json) {
-    id = json['id'];
-    name = json['name'];
-    brief = json['brief'];
-    picUrl = json['picUrl'];
-    isNew = json['isNew'];
-    isHot = json['isHot'];
-    counterPrice = json['counterPrice'];
-    retailPrice = json['retailPrice'];
-  }
-  int? id;
-  String? name;
-  String? brief;
-  String? picUrl;
-  bool? isNew;
-  bool? isHot;
-  double? counterPrice;
-  double? retailPrice;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['name'] = name;
-    map['brief'] = brief;
-    map['picUrl'] = picUrl;
-    map['isNew'] = isNew;
-    map['isHot'] = isHot;
-    map['counterPrice'] = counterPrice;
-    map['retailPrice'] = retailPrice;
-    return map;
-  }
-
-}
-
 /// id : 1001000
 /// name : "MUJI制造商"
 /// desc : "严选精选了MUJI制造商和生产原料，\n用几乎零利润的价格，剔除品牌溢价，\n让用户享受原品牌的品质生活。"
@@ -542,47 +488,47 @@ class CouponList {
 /// counterPrice : 56
 /// retailPrice : 36
 
-class NewGoodsList {
-  NewGoodsList({
-      this.id, 
-      this.name, 
-      this.brief, 
-      this.picUrl, 
-      this.isNew, 
-      this.isHot, 
-      this.counterPrice, 
-      this.retailPrice,});
-
-  NewGoodsList.fromJson(dynamic json) {
-    id = json['id'];
-    name = json['name'];
-    brief = json['brief'];
-    picUrl = json['picUrl'];
-    isNew = json['isNew'];
-    isHot = json['isHot'];
-    counterPrice = json['counterPrice'];
-    retailPrice = json['retailPrice'];
-  }
-  int? id;
-  String? name;
-  String? brief;
-  String? picUrl;
-  bool? isNew;
-  bool? isHot;
-  double? counterPrice;
-  double? retailPrice;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['name'] = name;
-    map['brief'] = brief;
-    map['picUrl'] = picUrl;
-    map['isNew'] = isNew;
-    map['isHot'] = isHot;
-    map['counterPrice'] = counterPrice;
-    map['retailPrice'] = retailPrice;
-    return map;
-  }
-
-}
+// class NewGoodsList {
+//   NewGoodsList({
+//       this.id,
+//       this.name,
+//       this.brief,
+//       this.picUrl,
+//       this.isNew,
+//       this.isHot,
+//       this.counterPrice,
+//       this.retailPrice,});
+//
+//   NewGoodsList.fromJson(dynamic json) {
+//     id = json['id'];
+//     name = json['name'];
+//     brief = json['brief'];
+//     picUrl = json['picUrl'];
+//     isNew = json['isNew'];
+//     isHot = json['isHot'];
+//     counterPrice = json['counterPrice'];
+//     retailPrice = json['retailPrice'];
+//   }
+//   int? id;
+//   String? name;
+//   String? brief;
+//   String? picUrl;
+//   bool? isNew;
+//   bool? isHot;
+//   double? counterPrice;
+//   double? retailPrice;
+//
+//   Map<String, dynamic> toJson() {
+//     final map = <String, dynamic>{};
+//     map['id'] = id;
+//     map['name'] = name;
+//     map['brief'] = brief;
+//     map['picUrl'] = picUrl;
+//     map['isNew'] = isNew;
+//     map['isHot'] = isHot;
+//     map['counterPrice'] = counterPrice;
+//     map['retailPrice'] = retailPrice;
+//     return map;
+//   }
+//
+// }

@@ -18,7 +18,7 @@ class AppStrings{
   static const String KITCHEN = "餐厨";
   static const String AT_HOME = "居家";
   static const String HOT_SALE = "热卖";
-  static const String SPECIAL = "专题";
+  static const String SPECIAL = "专题精选";
   static const String NEW_PRODUCTS = "新品";
   static const String MANUFACTURING = "品牌制造";
   static const String COUPON_AREA = "优惠券专区";

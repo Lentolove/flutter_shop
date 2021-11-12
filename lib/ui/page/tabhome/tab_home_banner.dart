@@ -10,7 +10,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 ///TabHome 首页顶部的轮播图
 class TabHomeBanner extends StatelessWidget {
   ///轮播图数据
-  final List<HomeBanner>? bannerData;
+  final List<HomeBanner> bannerData;
 
   const TabHomeBanner({Key? key, required this.bannerData}) : super(key: key);
 
@@ -21,20 +21,20 @@ class TabHomeBanner extends StatelessWidget {
       color: AppColors.COLOR_F0F0F0,
       height: ScreenUtil().setHeight(AppDimens.DIMENS_480),
       width: double.infinity,
-      child: bannerData == null || bannerData!.isEmpty
+      child: bannerData.isEmpty
           ? Image.asset(AppImages.DEFAULT_PICTURE)
           : Swiper(
               onTap: (index) {
                 //todo
               },
-              itemCount: bannerData!.length,
+              itemCount: bannerData.length,
               scrollDirection: Axis.horizontal,
               loop: true,
               index: 0,
               autoplay: true,
               itemBuilder: (BuildContext context, int index) {
                 return CachedImageView(
-                    double.infinity, double.infinity, bannerData![index].url!);
+                    double.infinity, double.infinity, bannerData[index].url!);
               },
               duration: 1000,
               pagination: SwiperPagination(
