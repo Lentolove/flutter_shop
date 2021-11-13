@@ -7,14 +7,18 @@ import 'package:flutter_shop/constant/text_style.dart';
 
 ///网络异常展示的控件
 class NetWorkErrorView extends StatelessWidget {
-  final VoidCallback callback;
+  final VoidCallback? callback;
 
-  const NetWorkErrorView({Key? key, required this.callback}) : super(key: key);
+  const NetWorkErrorView({Key? key, this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: callback,
+      onTap: (){
+        if(callback != null){
+          callback;
+        }
+      },
       child: Container(
         width: double.maxFinite,
         height: double.maxFinite,

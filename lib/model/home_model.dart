@@ -10,13 +10,13 @@
 
 class HomeModel {
 
-  List<GoodsList>? newGoodsList;
+  List<GoodsModel>? newGoodsList;
   List<CouponList>? couponList;
   List<Channel>? channel;
   List<HomeModelGrouponlist>? grouponList;
   List<HomeBanner>? banner;
   List<BrandList>? brandList;
-  List<GoodsList>? hotGoodsList;
+  List<GoodsModel>? hotGoodsList;
   List<TopicList>? topicList;
   List<FloorGoodsList>? floorGoodsList;
 
@@ -35,7 +35,7 @@ class HomeModel {
     if (json['newGoodsList'] != null) {
       newGoodsList = [];
       json['newGoodsList'].forEach((v) {
-        newGoodsList?.add(GoodsList.fromJson(v));
+        newGoodsList?.add(GoodsModel.fromJson(v));
       });
     }
     if (json['couponList'] != null) {
@@ -71,7 +71,7 @@ class HomeModel {
     if (json['hotGoodsList'] != null) {
       hotGoodsList = [];
       json['hotGoodsList'].forEach((v) {
-        hotGoodsList?.add(GoodsList.fromJson(v));
+        hotGoodsList?.add(GoodsModel.fromJson(v));
       });
     }
     if (json['topicList'] != null) {
@@ -138,13 +138,13 @@ class FloorGoodsList {
     if (json['goodsList'] != null) {
       goodsList = [];
       json['goodsList'].forEach((v) {
-        goodsList?.add(GoodsList.fromJson(v));
+        goodsList?.add(GoodsModel.fromJson(v));
       });
     }
     id = json['id'];
   }
   String? name;
-  List<GoodsList>? goodsList;
+  List<GoodsModel>? goodsList;
   int? id;
 
   Map<String, dynamic> toJson() {
@@ -158,7 +158,6 @@ class FloorGoodsList {
   }
 
 }
-
 
 class HomeModelGrouponlist {
   String? brief;
@@ -209,8 +208,8 @@ class HomeModelGrouponlist {
 /// counterPrice : 919
 /// retailPrice : 899
 
-class GoodsList {
-  GoodsList({
+class GoodsModel {
+  GoodsModel({
       this.id, 
       this.name, 
       this.brief, 
@@ -220,7 +219,7 @@ class GoodsList {
       this.counterPrice, 
       this.retailPrice,});
 
-  GoodsList.fromJson(dynamic json) {
+  GoodsModel.fromJson(dynamic json) {
     id = json['id'];
     name = json['name'];
     brief = json['brief'];
@@ -440,13 +439,13 @@ class Channel {
 
 class CouponList {
   CouponList({
-      this.id, 
-      this.name, 
-      this.desc, 
-      this.tag, 
-      this.discount, 
-      this.min, 
-      this.days,});
+    this.id,
+    this.name,
+    this.desc,
+    this.tag,
+    this.discount,
+    this.min,
+    this.days,});
 
   CouponList.fromJson(dynamic json) {
     id = json['id'];
@@ -457,6 +456,7 @@ class CouponList {
     min = json['min'];
     days = json['days'];
   }
+
   int? id;
   String? name;
   String? desc;
@@ -476,59 +476,4 @@ class CouponList {
     map['days'] = days;
     return map;
   }
-
 }
-
-/// id : 1116011
-/// name : "蔓越莓曲奇 200克"
-/// brief : "酥脆奶香，甜酸回味"
-/// picUrl : "http://yanxuan.nosdn.127.net/767b370d07f3973500db54900bcbd2a7.png"
-/// isNew : true
-/// isHot : true
-/// counterPrice : 56
-/// retailPrice : 36
-
-// class NewGoodsList {
-//   NewGoodsList({
-//       this.id,
-//       this.name,
-//       this.brief,
-//       this.picUrl,
-//       this.isNew,
-//       this.isHot,
-//       this.counterPrice,
-//       this.retailPrice,});
-//
-//   NewGoodsList.fromJson(dynamic json) {
-//     id = json['id'];
-//     name = json['name'];
-//     brief = json['brief'];
-//     picUrl = json['picUrl'];
-//     isNew = json['isNew'];
-//     isHot = json['isHot'];
-//     counterPrice = json['counterPrice'];
-//     retailPrice = json['retailPrice'];
-//   }
-//   int? id;
-//   String? name;
-//   String? brief;
-//   String? picUrl;
-//   bool? isNew;
-//   bool? isHot;
-//   double? counterPrice;
-//   double? retailPrice;
-//
-//   Map<String, dynamic> toJson() {
-//     final map = <String, dynamic>{};
-//     map['id'] = id;
-//     map['name'] = name;
-//     map['brief'] = brief;
-//     map['picUrl'] = picUrl;
-//     map['isNew'] = isNew;
-//     map['isHot'] = isHot;
-//     map['counterPrice'] = counterPrice;
-//     map['retailPrice'] = retailPrice;
-//     return map;
-//   }
-//
-// }

@@ -11,4 +11,12 @@ class AppUrls {
   static const String HOME_SECOND_CATEGORY=BASE_URL+'/catalog/getsecondcategory';//商品分类第二级
 
 
+
+  static const String GOODS_LIST_URL=BASE_URL+'/goods/list';//分类下的商品列表
+
+
+  static const String CATEGORY_LIST=BASE_URL+"/goods/category";//获取分类下的子类
+
+
+
 }

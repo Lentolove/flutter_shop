@@ -8,7 +8,7 @@ import 'package:flutter_shop/ui/widgets/good_widget.dart';
 
 ///首页的商品，每个模块四个，2*2构成
 class TabHomeGoods extends StatelessWidget {
-  final List<GoodsList> goodList;
+  final List<GoodsModel> goodList;
 
   final String title;
 
@@ -45,7 +45,7 @@ class TabHomeGoods extends StatelessWidget {
     );
   }
 
-  Widget _getGridViewItem(BuildContext context, GoodsList good) {
+  Widget _getGridViewItem(BuildContext context, GoodsModel good) {
     return GoodWidget(
         good: good,
         itemClick: (value) {

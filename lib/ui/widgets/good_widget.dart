@@ -12,7 +12,7 @@ typedef ItemClick = Function(int value);
 
 ///通用的商品信息 Widget
 class GoodWidget extends StatelessWidget {
-  final GoodsList good;
+  final GoodsModel good;
 
   final ItemClick itemClick;
 

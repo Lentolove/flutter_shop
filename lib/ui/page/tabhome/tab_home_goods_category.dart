@@ -4,6 +4,7 @@ import 'package:flutter_shop/constant/app_colors.dart';
 import 'package:flutter_shop/constant/app_dimens.dart';
 import 'package:flutter_shop/constant/text_style.dart';
 import 'package:flutter_shop/model/home_model.dart';
+import 'package:flutter_shop/ui/page/goods/home_category_goods_page.dart';
 import 'package:flutter_shop/ui/widgets/cached_image.dart';
 
 ///TabHome 商品类别
@@ -47,7 +48,9 @@ class TabHomeGoodsCategory extends StatelessWidget {
     return Center(
       child: InkWell(
         onTap: () {
-          //todo
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
+            return HomeCategoryGoodsPage(title: channel.name!,id: channel.id!);
+          }));
         },
         child: Column(
           children: [
