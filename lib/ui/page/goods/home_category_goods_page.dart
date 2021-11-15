@@ -45,7 +45,7 @@ class _HomeCategoryGoodsPageState extends State<HomeCategoryGoodsPage>
               title: Text(widget.title),
               centerTitle: true,
               bottom: PreferredSize(
-                preferredSize: Size.fromHeight(48),
+                preferredSize: const Size.fromHeight(48),
                 child: Material(
                   color: AppColors.COLOR_FFFFFF,
                   child: TabBar(

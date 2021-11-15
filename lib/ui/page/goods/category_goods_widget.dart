@@ -10,6 +10,8 @@ import 'package:flutter_shop/view_model/category_goods_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import 'good_detail_page.dart';
+
 ///商品列表，两列排列
 class CategoryGoodsWidget extends StatefulWidget {
   final int categoryId;
@@ -69,31 +71,33 @@ class _CategoryGoodsWidgetState extends State<CategoryGoodsWidget> {
   }
 
   _contentView(CategoryGoodsViewModel model) {
-    return Container(
-        child: SmartRefresher(
+    return SmartRefresher(
       enablePullDown: true,
       enablePullUp: _model.canLoadMore,
       onRefresh: _onRefresh,
       onLoading: _onLoadMore,
       header: const WaterDropMaterialHeader(
-        backgroundColor: AppColors.COLOR_FF5722,
+    backgroundColor: AppColors.COLOR_FF5722,
       ),
       controller: _refreshController,
       child: GridView.builder(
-          itemCount: _model.goodList.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: dimens10,
-              crossAxisSpacing: dimens10,
-              childAspectRatio: 0.8),
-          itemBuilder: (BuildContext context, int index) {
-            return GoodWidget(
-                good: model.goodList[index],
-                itemClick: (value) {
-                  //todo 跳转到详情界面
-                });
-          }),
-    ));
+      itemCount: _model.goodList.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: dimens10,
+          crossAxisSpacing: dimens10,
+          childAspectRatio: 0.8),
+      itemBuilder: (BuildContext context, int index) {
+        return GoodWidget(
+            good: model.goodList[index],
+            itemClick: (value) {
+              //todo 跳转到详情界面
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
+                return GoodDetailPage(goodId: model.goodList[index].id!);
+              }));
+            });
+      }),
+    );
   }
 
   ///下拉刷新

@@ -11,6 +11,8 @@ import 'package:flutter_shop/view_model/tab_category_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import 'goods/category_googs_page.dart';
+
 ///商品分类 tab 页面
 class TabCategory extends StatefulWidget {
   const TabCategory({Key? key}) : super(key: key);
@@ -209,6 +211,9 @@ class _TabCategoryState extends State<TabCategory>
     return GestureDetector(
       onTap: () {
         //todo
+        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
+          return CategoryGoodsPage(categoryName: model.name!,categoryId: model.id!);
+        }));
       },
       child: Card(
         child: Container(

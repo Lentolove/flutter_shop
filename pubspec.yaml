@@ -56,6 +56,10 @@ dependencies:
   #弹吐司
   fluttertoast: ^8.0.8
 
+  #html插件
+  flutter_widget_from_html_core: ^0.8.2
+  flutter_html: ^2.1.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

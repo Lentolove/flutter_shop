@@ -2,6 +2,7 @@ import 'package:flutter_shop/base/json_result.dart';
 import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/constant/app_urls.dart';
 import 'package:flutter_shop/model/category_goods_model.dart';
+import 'package:flutter_shop/model/good_detail_model.dart';
 import 'package:flutter_shop/utils/http_util.dart';
 
 class GoodsRepository{
@@ -24,6 +25,32 @@ class GoodsRepository{
         jsonResult.isSuccess = false;
         jsonResult.message =
             response[AppStrings.ERR_MSG] ?? AppStrings.SERVER_EXCEPTION;
+      }
+    } catch (e) {
+      print(e);
+      jsonResult.isSuccess = false;
+      jsonResult.message = AppStrings.SERVER_EXCEPTION;
+    }
+    return jsonResult;
+  }
+
+
+  ///获取商品详情
+  Future<JsonResult<GoodDetailModel>> getGoodsDetailData(
+      Map<String, dynamic> parameters) async {
+    JsonResult<GoodDetailModel> jsonResult = JsonResult<GoodDetailModel>();
+    try {
+      var response = await HttpUtil.instance
+          .get(AppUrls.GOODS_DETAILS_URL, parameters: parameters);
+      if (response[AppStrings.ERR_NO] == 0 &&
+          response[AppStrings.DATA] != null) {
+        GoodDetailModel goodsDetailEntity =
+        GoodDetailModel.fromJson(response[AppStrings.DATA]);
+        jsonResult.isSuccess = true;
+        jsonResult.data = goodsDetailEntity;
+      } else {
+        jsonResult.isSuccess = false;
+        jsonResult.message = response[AppStrings.ERR_MSG] ?? AppStrings.SERVER_EXCEPTION;
       }
     } catch (e) {
       print(e);
