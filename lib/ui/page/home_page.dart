@@ -8,6 +8,8 @@ import 'package:flutter_shop/ui/page/tab_mine_page.dart';
 import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/ui/page/tabhome/tab_home_page.dart';
 
+import 'login/register_page.dart';
+
 ///首页，管理四个页面的切换
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,18 +21,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  List<Widget> _pageList = [];
+  final List<Widget> _pageList = [];
 
   @override
   void initState() {
     print("HomePage  initState");
-
     super.initState();
     _pageList
       ..add(TabHomePage())
       ..add(TabCategory())
       ..add(TabCarPage())
       ..add(TabMinePage());
+      // ..add(RegisterPage());
   }
 
   @override
@@ -41,7 +43,6 @@ class _HomePageState extends State<HomePage> {
             maxHeight: MediaQuery.of(context).size.height),
         designSize: const Size(1080, 1920),
         orientation: Orientation.portrait);
-
     return Scaffold(
       //IndexedStack 的使用：https://juejin.cn/post/6973534234233274404
       body: IndexedStack(

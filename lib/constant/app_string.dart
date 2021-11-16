@@ -45,11 +45,18 @@ class AppStrings{
   static const String SPECIFICATIONS = "规格";
   static const String NUMBER = "数量";
   static const String ACCOUNT_RULE = "账号必须为长度为11的数字";
+  static const String PHONENUM_RULE = "手机号必须为11位有效数字";
   static const String PASSWORD_RULE = "密码最少为6位";
-  static const String ACCOUNT_HINT = "请输入手机号码";
+  static const String CONFIRMPASSWORD_RULE = "两次密码输入不一致";
+  static const String PHONE_HINT = "请输入手机号码";
+  static const String USERNAME_HINT = "请输入用户名";
   static const String PASSWORD_HINT = "请输入密码";
+  static const String CONFIRM_HINT = "请确认密码";
   static const String ACCOUNT = "账号";
+  static const String PHONE = "手机号";
+  static const String USERNAME = "用户名";
   static const String PASSWORD = "密码";
+  static const String CONFIRM_PASSWORD = "确认密码";
   static const String LOGIN_WELCOME = "欢迎登录FM商城";
   static const String LOGIN_APP_INTRODUCE = "Flutter开发的在线商城系统";
   static const String LOGIN = "登录";
@@ -94,7 +101,6 @@ class AppStrings{
   static const String DELETE_SUCCESS = "删除成功";
   static const String ADDRESS_DELETE_SUCCESS = "删除成功";
   static const String NAME = "姓名";
-  static const String PHONE = "电话";
   static const String ADDRESS_AREA = "地区";
   static const String ADDRESS_DETAIL = "详细地址";
   static const String SAVE = "保存";

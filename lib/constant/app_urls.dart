@@ -18,4 +18,9 @@ class AppUrls {
   static const String GOODS_DETAILS_URL=BASE_URL+'/goods/detail';//商品详情
 
 
+  //用户信息相关接口
+  static const String REGISTER=BASE_URL+'/auth/register';//注册
+
+  static const String LOGIN=BASE_URL+'/auth/login';//登录
+
 }
