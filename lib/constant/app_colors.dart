@@ -16,19 +16,19 @@ class AppColors {
   static const Color COLOR_FFB24E=Color(0xFFFFB24E);
   static const Color COLOR_EAEAEA=Color(0xFFEAEAEA);
   static const Color COLOR_TRANSPARENT = Colors.transparent;
-  static const MaterialColor themeColor = const MaterialColor(
+  static const MaterialColor themeColor = MaterialColor(
     0xffff5722,
-    const <int, Color>{
-      50: const Color(0xffff5722),
-      100: const Color(0xffff5722),
-      200: const Color(0xffff5722),
-      300: const Color(0xffff5722),
-      400: const Color(0xffff5722),
-      500: const Color(0xffff5722),
-      600: const Color(0xffff5722),
-      700: const Color(0xffff5722),
-      800: const Color(0xffff5722),
-      900: const Color(0xffff5722),
+    <int, Color>{
+      50: Color(0xffff5722),
+      100: Color(0xffff5722),
+      200: Color(0xffff5722),
+      300: Color(0xffff5722),
+      400: Color(0xffff5722),
+      500: Color(0xffff5722),
+      600: Color(0xffff5722),
+      700: Color(0xffff5722),
+      800: Color(0xffff5722),
+      900: Color(0xffff5722),
     },
   );
 }

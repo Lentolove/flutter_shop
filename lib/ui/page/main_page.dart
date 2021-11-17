@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_shop/ui/page/home_page.dart';
 
 ///主页面 page
 class MainPage extends StatefulWidget {
@@ -19,6 +21,12 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    ScreenUtil.init(
+        BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width,
+            maxHeight: MediaQuery.of(context).size.height),
+        designSize: const Size(1080, 1920),
+        orientation: Orientation.portrait);
+    return HomePage();
   }
 }

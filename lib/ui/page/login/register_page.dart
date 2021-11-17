@@ -181,7 +181,6 @@ class RegisterPage extends StatelessWidget {
     if (value == null ||
         value.trim().toString().isEmpty ||
         value.trim().toString().length < 11) {
-      print("_validatorPhoneNum $value");
       return AppStrings.PHONENUM_RULE;
     }
     return null;
@@ -190,7 +189,6 @@ class RegisterPage extends StatelessWidget {
   ///验证密码是否满足条件
   String? _validatorPassword(String? value) {
     if (value == null || value.trim().isEmpty || value.trim().length < 6) {
-      print("_validatorPassword $value");
       return AppStrings.PASSWORD_RULE;
     }
     return null;

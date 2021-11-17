@@ -8,6 +8,7 @@ import 'package:flutter_shop/ui/page/tab_mine_page.dart';
 import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/ui/page/tabhome/tab_home_page.dart';
 
+import 'login/login_page.dart';
 import 'login/register_page.dart';
 
 ///首页，管理四个页面的切换
@@ -31,18 +32,12 @@ class _HomePageState extends State<HomePage> {
       ..add(TabHomePage())
       ..add(TabCategory())
       ..add(TabCarPage())
-      ..add(TabMinePage());
-      // ..add(RegisterPage());
+      // ..add(TabMinePage());
+      ..add(LoginPage());
   }
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: const Size(1080, 1920),
-        orientation: Orientation.portrait);
     return Scaffold(
       //IndexedStack 的使用：https://juejin.cn/post/6973534234233274404
       body: IndexedStack(

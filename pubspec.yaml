@@ -60,6 +60,15 @@ dependencies:
   flutter_widget_from_html_core: ^0.8.2
   flutter_html: ^2.1.5
 
+  #路由插件 ： https://pub.dev/packages/fluro
+  fluro: ^2.0.3
+
+  #sp工具类：https://pub.dev/packages/shared_preferences
+  shared_preferences: ^2.0.8
+
+  #获取设备基础信息：https://pub.dev/packages/device_preview
+#  device_preview: ^0.7.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
