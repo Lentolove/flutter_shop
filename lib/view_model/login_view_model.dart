@@ -1,12 +1,23 @@
 import 'package:flutter_shop/base/base_view_model.dart';
 import 'package:flutter_shop/constant/app_parameters.dart';
+import 'package:flutter_shop/constant/app_string.dart';
+import 'package:flutter_shop/model/user_model.dart';
 import 'package:flutter_shop/repository/user_repository.dart';
 import 'package:flutter_shop/utils/toast_util.dart';
+import 'package:flutter_shop/view_model/user_view_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-class LoginViewModel extends BaseViewModel{
+class LoginViewModel extends BaseViewModel {
 
   final UserRepository _repository = UserRepository();
+
+  UserModel? _userModel;
+
+  ///全文通用的一个 UserViewModel
+  UserViewModel userViewModel;
+
+  LoginViewModel(this.userViewModel);
 
 
   Future<bool> login(String account, String passWord) async {
@@ -17,12 +28,10 @@ class LoginViewModel extends BaseViewModel{
     };
     await _repository.login(parameters).then((response) {
       if (response.isSuccess) {
-        // _userEntity = response.data;
-        // _saveUserInfo();
-        // _userViewModel.setPersonInformation(
-        //     _userEntity.userInfo.avatarUrl, _userEntity.userInfo.nickName);
-        ToastUtil.showToast(response.message);
-        print("登录成功");
+        _userModel = response.data;
+        _saveUserInfo();
+        userViewModel.setUserInformation(
+            _userModel!.userInfo!.avatarUrl!, _userModel!.userInfo!.nickName!);
         notifyListeners();
         result = true;
       } else {
@@ -31,6 +40,20 @@ class LoginViewModel extends BaseViewModel{
       }
     });
     return result;
+  }
+
+  ///存储用户状态信息
+  _saveUserInfo() async {
+    if (_userModel == null) return;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences
+        .setString(AppStrings.TOKEN, _userModel!.token!)
+        .then((value) => print(value));
+    await sharedPreferences.setString(
+        AppStrings.HEAD_URL, _userModel!.userInfo!.avatarUrl!);
+    await sharedPreferences.setString(
+        AppStrings.NICK_NAME, _userModel!.userInfo!.nickName!);
+    sharedPreferences.commit();
   }
 
 }

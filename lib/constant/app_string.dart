@@ -44,7 +44,7 @@ class AppStrings{
   static const String ALREAD_SELECTED = "已选择：";
   static const String SPECIFICATIONS = "规格";
   static const String NUMBER = "数量";
-  static const String ACCOUNT_RULE = "账号必须为长度为11的数字";
+  static const String ACCOUNT_RULE = "用户名不能为空";
   static const String PHONENUM_RULE = "手机号必须为11位有效数字";
   static const String PASSWORD_RULE = "密码最少为6位";
   static const String CONFIRMPASSWORD_RULE = "两次密码输入不一致";

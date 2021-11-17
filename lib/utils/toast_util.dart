@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ToastUtil {
-  static showToast(String message) {
-    if (message.isEmpty) {
+  static showToast(String? message) {
+    if (message == null ||  message.isEmpty) {
       return;
     }
     Fluttertoast.showToast(

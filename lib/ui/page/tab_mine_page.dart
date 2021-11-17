@@ -7,8 +7,6 @@ import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/constant/text_style.dart';
 import 'package:flutter_shop/ui/widgets/divider_line.dart';
 import 'package:flutter_shop/ui/widgets/icon_text_arrow_view.dart';
-import 'package:flutter_shop/view_model/login_view_model.dart';
-import 'package:flutter_shop/view_model/register_view_model.dart';
 import 'package:flutter_shop/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -20,34 +18,7 @@ class TabMinePage extends StatefulWidget {
   _TabMinePageState createState() => _TabMinePageState();
 }
 
-class _TabMinePageState extends State<TabMinePage> with TickerProviderStateMixin{
-
-
-  final UserViewModel _model = UserViewModel();
-
-  final RegisterViewModel _registerViewModel = RegisterViewModel();
-  final LoginViewModel _loginViewModel = LoginViewModel();
-
-  @override
-  void initState() {
-    super.initState();
-    _model.refreshData();
-    // _registerViewModel.register("13257214460", "123456");
-    _loginViewModel.login("13257214460", "123456");
-    print("TabMinePage  initState");
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => _model,
-      child: Consumer<UserViewModel>(
-        builder: (BuildContext context,UserViewModel model,Widget? child){
-          return _contentWidget(_model);
-        },
-      ),
-    );
-  }
+class _TabMinePageState extends State<TabMinePage> {
 
   double dimens80 = ScreenUtil().setWidth(AppDimens.DIMENS_80);
   double dimens30 = ScreenUtil().setWidth(AppDimens.DIMENS_30);
@@ -55,6 +26,19 @@ class _TabMinePageState extends State<TabMinePage> with TickerProviderStateMixin
   double dimens10 = ScreenUtil().setWidth(AppDimens.DIMENS_10);
   double dimens100 = ScreenUtil().setWidth(AppDimens.DIMENS_100);
   double dimens180 = ScreenUtil().setWidth(AppDimens.DIMENS_180);
+
+  @override
+  void initState() {
+    super.initState();
+    print("TabMinePage  initState");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<UserViewModel>(builder: (context, model, child) {
+      return _contentWidget(model);
+    });
+  }
 
   Widget _contentWidget(UserViewModel model) {
     return Stack(
@@ -100,8 +84,8 @@ class _TabMinePageState extends State<TabMinePage> with TickerProviderStateMixin
             margin: EdgeInsets.only(left: dimens30),
             child: CircleAvatar(
               radius: ScreenUtil().setWidth(AppDimens.DIMENS_90),
-              backgroundImage: NetworkImage(
-                  model.pictureUrl ?? AppStrings.DEFAULT_URL),
+              backgroundImage:
+                  NetworkImage(model.pictureUrl ?? AppStrings.DEFAULT_URL),
             )),
         Padding(padding: EdgeInsets.only(left: dimens30)),
         Column(

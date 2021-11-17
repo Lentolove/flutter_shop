@@ -7,6 +7,8 @@ import 'package:flutter_shop/ui/page/tab_category_page.dart';
 import 'package:flutter_shop/ui/page/tab_mine_page.dart';
 import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/ui/page/tabhome/tab_home_page.dart';
+import 'package:flutter_shop/utils/navigator_util.dart';
+import 'package:flutter_shop/utils/shared_preferences_util.dart';
 
 import 'login/login_page.dart';
 import 'login/register_page.dart';
@@ -32,8 +34,8 @@ class _HomePageState extends State<HomePage> {
       ..add(TabHomePage())
       ..add(TabCategory())
       ..add(TabCarPage())
-      // ..add(TabMinePage());
-      ..add(LoginPage());
+      ..add(TabMinePage());
+    // ..add(LoginPage());
   }
 
   @override
@@ -67,6 +69,13 @@ class _HomePageState extends State<HomePage> {
   void _onItemTapped(int index) {
     if (index == 2 || index == 3) {
       //todo 对购物车页面和我的页面登录验证拦截
+      //检查本地是否保存了token，如果没有跳转到登录界面
+      SharedPreferencesUtil.instance.getString(AppStrings.TOKEN).then((value) {
+        if (value == null) {
+          NavigatorUtil.goLogin(context);
+          return;
+        }
+      });
       _changeIndex(index);
     } else {
       //防止点击当前BottomNavigationBarItem rebuild

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shop/ui/page/home_page.dart';
+import 'package:flutter_shop/view_model/user_view_model.dart';
+import 'package:provider/provider.dart';
+
+import 'guide/guide_page.dart';
 
 ///主页面 page
 class MainPage extends StatefulWidget {
@@ -10,8 +14,7 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin{
-
+class _MainPageState extends State<MainPage>{
 
   @override
   void initState() {
@@ -27,6 +30,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             maxHeight: MediaQuery.of(context).size.height),
         designSize: const Size(1080, 1920),
         orientation: Orientation.portrait);
-    return HomePage();
+    return context.watch<UserViewModel>().isFirst ? const GuidePage() : const HomePage();
   }
 }

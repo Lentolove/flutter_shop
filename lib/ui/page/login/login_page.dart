@@ -5,8 +5,11 @@ import 'package:flutter_shop/constant/app_dimens.dart';
 import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/constant/text_style.dart';
 import 'package:flutter_shop/ui/widgets/loading_dialog.dart';
+import 'package:flutter_shop/utils/navigator_util.dart';
 import 'package:flutter_shop/utils/toast_util.dart';
 import 'package:flutter_shop/view_model/login_view_model.dart';
+import 'package:flutter_shop/view_model/user_view_model.dart';
+import 'package:provider/src/provider.dart';
 
 ///登录界面
 class LoginPage extends StatelessWidget {
@@ -16,12 +19,13 @@ class LoginPage extends StatelessWidget {
 
   final TextEditingController _passWordController = TextEditingController();
 
-  final LoginViewModel _model = LoginViewModel();
+  late LoginViewModel _model;
 
   LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    _model = LoginViewModel(context.read<UserViewModel>());
     return Scaffold(
       backgroundColor: AppColors.COLOR_FFFFFF,
       appBar: AppBar(
@@ -55,24 +59,24 @@ class LoginPage extends StatelessWidget {
                   Padding(
                       padding: EdgeInsets.only(
                           top: ScreenUtil().setHeight(AppDimens.DIMENS_100))),
-                  /*账号*/
+                  /*用户名*/
                   TextFormField(
                     maxLines: 1,
                     maxLength: 11,
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.text,
                     validator: (v) {
                       return _validatorPhoneNum(v);
                     },
                     decoration: InputDecoration(
                       icon: Icon(
-                        Icons.phone,
+                        Icons.person,
                         color: AppColors.COLOR_FF5722,
                         size: ScreenUtil().setWidth(AppDimens.DIMENS_80),
                       ),
-                      hintText: AppStrings.PHONE_HINT,
+                      hintText: AppStrings.USERNAME_HINT,
                       hintStyle: FMTextStyle.color_999999_size_36,
                       labelStyle: FMTextStyle.color_333333_size_42,
-                      labelText: AppStrings.PHONE,
+                      labelText: AppStrings.USERNAME,
                     ),
                     controller: _accountController,
                   ),
@@ -103,20 +107,20 @@ class LoginPage extends StatelessWidget {
                       padding: EdgeInsets.only(
                           top: ScreenUtil().setHeight(AppDimens.DIMENS_80))),
                   SizedBox(
-                    width: double.infinity,
-                    height: ScreenUtil().setHeight(AppDimens.DIMENS_120),
-                    child: RaisedButton(
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(AppDimens.DIMENS_30))),
-                      color: AppColors.COLOR_FF5722,
-                      onPressed: () {
-                        //todo 跳转到登录界面
-                      },
-                      child: Text(AppStrings.LOGIN,
-                          style: FMTextStyle.color_ffffff_size_42),
-                    )
-                  ),
+                      width: double.infinity,
+                      height: ScreenUtil().setHeight(AppDimens.DIMENS_120),
+                      child: RaisedButton(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(AppDimens.DIMENS_30))),
+                        color: AppColors.COLOR_FF5722,
+                        onPressed: () {
+                          //todo 跳转到登录界面
+                          _login(context);
+                        },
+                        child: Text(AppStrings.LOGIN,
+                            style: FMTextStyle.color_ffffff_size_42),
+                      )),
                   Padding(
                       padding: EdgeInsets.only(
                           top: ScreenUtil().setHeight(AppDimens.DIMENS_42))),
@@ -125,7 +129,7 @@ class LoginPage extends StatelessWidget {
                       margin: EdgeInsets.only(
                           right: ScreenUtil().setWidth(AppDimens.DIMENS_30)),
                       child: InkWell(
-                        onTap: (){
+                        onTap: () {
                           _gotoRegister(context);
                         },
                         child: Text(
@@ -143,31 +147,34 @@ class LoginPage extends StatelessWidget {
   }
 
   //todo 跳转到登录界面
-  _gotoRegister(BuildContext context){
-
+  _gotoRegister(BuildContext context) {
+    NavigatorUtil.goRegister(context);
   }
 
+  ///执行登录逻辑
   void _login(BuildContext context) {
     FocusScope.of(context).unfocus();
     if (_loginKey.currentState!.validate()) {
       _showLoginDialog(context);
-      _model.login(_accountController.text, _passWordController.text)
-          .then((response) {
+      _model.login(_accountController.text, _passWordController.text).then(
+          (response) {
         Navigator.pop(context);
         if (!response) {
-          // ToastUtil.showToast(_loginViewModel.errorMessage);
+          Navigator.pop(context);
+          ToastUtil.showToast(_model.errorMessage);
         } else {
-          // Provider.of<UserViewModel>(context, listen: false).refreshData();
-          // Provider.of<CartViewModel>(context, listen: false).queryCart();
-          // Navigator.pop(context);
+          //更新登录的状态
+          context.watch<UserViewModel>().refreshData();
+          Navigator.pop(context);
         }
       }, onError: (error) {
-        // ToastUtil.showToast(_loginViewModel.errorMessage);
+        ToastUtil.showToast(_model.errorMessage);
       });
     }
   }
 
-   _showLoginDialog(BuildContext context) {
+  ///显示弹窗
+  _showLoginDialog(BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -180,13 +187,10 @@ class LoginPage extends StatelessWidget {
         });
   }
 
-
-  ///验证手机号是否满足
+  ///验证用户名
   String? _validatorPhoneNum(String? value) {
-    if (value == null ||
-        value.trim().toString().isEmpty ||
-        value.trim().toString().length < 11) {
-      return AppStrings.PHONENUM_RULE;
+    if (value == null || value.trim().toString().isEmpty ) {
+      return AppStrings.ACCOUNT_RULE;
     }
     return null;
   }
@@ -198,5 +202,4 @@ class LoginPage extends StatelessWidget {
     }
     return null;
   }
-
 }

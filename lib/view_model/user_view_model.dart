@@ -40,19 +40,28 @@ class UserViewModel extends BaseViewModel {
       await SharedPreferencesUtil.instance
           .getString(AppStrings.NICK_NAME)
           .then((value) => _userName = value);
+
       await SharedPreferencesUtil.instance
           .getString(AppStrings.HEAD_URL)
           .then((value) => _pictureUrl = value);
-
-      await SharedPreferencesUtil.instance
-          .getBool(AppStrings.IS_FIRST)
-          .then((value) {
-        _isFirst = value ??= true;
-      });
       // await _queryCoupon();
       // await _queryFootPrint();
       // await _queryCollection();
       notifyListeners();
+    }else{
+      await SharedPreferencesUtil.instance
+          .getBool(AppStrings.IS_FIRST)
+          .then((value) {
+        print("refreshData == $value");
+        _isFirst = value ??= true;
+      });
+      notifyListeners();
     }
+  }
+
+  ///更新用户信息
+  setUserInformation(String picture,String userName){
+    _pictureUrl = pictureUrl;
+    _userName = userName;
   }
 }
