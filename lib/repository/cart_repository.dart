@@ -9,7 +9,6 @@ import 'package:flutter_shop/utils/http_util.dart';
 class CartRepository {
 
 
-
   ///添加到购物车
   Future<JsonResult<dynamic>> addCart(Map<String, dynamic> parameters) async {
     JsonResult<dynamic> jsonResult = JsonResult<dynamic>();
@@ -153,4 +152,28 @@ class CartRepository {
     }
     return jsonResult;
   }
+
+  ///提交订单
+  Future<JsonResult<dynamic>> submitOrder(
+      Map<String, dynamic> parameters) async {
+    JsonResult<dynamic> jsonResult = JsonResult<dynamic>();
+    try {
+      var response = await HttpUtil.instance
+          .post(AppUrls.SUBMIT_ORDER, parameters: parameters);
+      if (response[AppStrings.ERR_NO] == 0 &&
+          response[AppStrings.DATA] != null) {
+        jsonResult.isSuccess = true;
+      } else {
+        jsonResult.isSuccess = false;
+        jsonResult.message = response[AppStrings.ERR_MSG] ?? AppStrings.SERVER_EXCEPTION;
+      }
+    } catch (e) {
+      print(e);
+      jsonResult.isSuccess = false;
+      jsonResult.message = AppStrings.SERVER_EXCEPTION;
+    }
+    return jsonResult;
+  }
+
+
 }

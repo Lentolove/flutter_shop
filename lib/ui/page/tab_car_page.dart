@@ -262,6 +262,7 @@ class _TabCarPageState extends State<TabCarPage> {
         });
   }
 
+  ///删除购物车商品
   _deleteCartItem(int productId, int index) {
     _cartViewModel.deleteCartGoods([productId], index).then((response) => {
           if (response) {Navigator.pop(context)}

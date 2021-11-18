@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_shop/constant/app_parameters.dart';
 import 'package:flutter_shop/ui/page/404/not_found_page.dart';
 import 'package:flutter_shop/ui/page/goods/category_googs_page.dart';
+import 'package:flutter_shop/ui/page/goods/fill_in_order_page.dart';
 import 'package:flutter_shop/ui/page/goods/good_detail_page.dart';
 import 'package:flutter_shop/ui/page/home_page.dart';
 import 'package:flutter_shop/ui/page/login/login_page.dart';
@@ -48,4 +49,10 @@ var loginHandler = Handler(handlerFunc: (context, parameters) {
 //注册界面
 var registerHandler = Handler(handlerFunc: (context, parameters) {
   return RegisterPage();
+});
+
+//填写订单界面
+var fillInOrderHandler = Handler(handlerFunc: (context, parameters) {
+  var cartId = int.parse(parameters[AppParameters.CART_ID]!.first);
+  return FillInOrderPage(cartId: cartId);
 });

@@ -83,6 +83,7 @@ class CartViewModel extends BaseViewModel {
         result = false;
       }
     });
+    notifyListeners();
     return result;
   }
 

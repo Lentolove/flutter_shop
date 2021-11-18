@@ -37,4 +37,6 @@ class AppUrls {
 
   static const String CART_BUY=BASE_URL+'/cart/checkout';//购物车下单
 
+  static const String SUBMIT_ORDER=BASE_URL+ '/order/submit';// 提交订单
+
 }

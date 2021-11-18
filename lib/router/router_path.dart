@@ -72,7 +72,7 @@ class Routers {
 
     router.define(register, handler: registerHandler);
 
-    // router.define(fillInOrder, handler: fillInOrderHandler);
+    router.define(fillInOrder, handler: fillInOrderHandler);
 
     router.define(login, handler: loginHandler);
 
