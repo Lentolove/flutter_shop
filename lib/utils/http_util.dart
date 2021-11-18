@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_shop/constant/app_string.dart';
+import 'package:flutter_shop/utils/shared_preferences_util.dart';
 
 ///数据请求单例类，工厂模式
 class HttpUtil {
@@ -29,6 +30,13 @@ class HttpUtil {
       print("params=${option.data}");
       _dio.lock();
       //todo 如果token存在在请求头加上token
+
+      await SharedPreferencesUtil.instance
+          .getString(AppStrings.TOKEN)
+          .then((token) {
+        options.headers[AppStrings.TOKEN] = token;
+        print("token=${token}");
+      });
       _dio.unlock();
       handler.next(option);
     }, onResponse: (response, handler) {

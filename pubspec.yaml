@@ -69,6 +69,9 @@ dependencies:
   #获取设备基础信息：https://pub.dev/packages/device_preview
 #  device_preview: ^0.7.0
 
+  # 可以作用滑动的组件，比如item的滑动删除等：https://pub.dev/packages/flutter_slidable
+  flutter_slidable: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

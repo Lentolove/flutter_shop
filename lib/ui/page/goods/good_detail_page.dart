@@ -8,6 +8,9 @@ import 'package:flutter_shop/constant/text_style.dart';
 import 'package:flutter_shop/model/good_detail_model.dart';
 import 'package:flutter_shop/ui/widgets/divider_line.dart';
 import 'package:flutter_shop/ui/widgets/page_status_widget.dart';
+import 'package:flutter_shop/utils/navigator_util.dart';
+import 'package:flutter_shop/utils/shared_preferences_util.dart';
+import 'package:flutter_shop/view_model/cart_view_model.dart';
 import 'package:flutter_shop/view_model/good_detail_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -25,11 +28,17 @@ class GoodDetailPage extends StatefulWidget {
 }
 
 class _GoodDetailPageState extends State<GoodDetailPage> {
+
   final GoodDetailViewModel _model = GoodDetailViewModel();
+
+  late CartViewModel _cartViewModel;
+
+  int _number = 1;
 
   @override
   void initState() {
     super.initState();
+    _cartViewModel = context.read<CartViewModel>();
     _model.getGoodsDetail(widget.goodId);
   }
 
@@ -112,10 +121,11 @@ class _GoodDetailPageState extends State<GoodDetailPage> {
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                           Radius.circular(AppDimens.DIMENS_30))),
-                  onPressed: () => {
+                  onPressed: (){
                     //todo
                     // openBottomSheet(
                     //     context, _goodsDetailViewModel.goodsDetailEntity, 2),
+                    _addCart();
                   },
                   child: Text(AppStrings.ADD_CART,
                       style: FMTextStyle.color_ffffff_size_42),
@@ -318,4 +328,23 @@ class _GoodDetailPageState extends State<GoodDetailPage> {
       ),
     );
   }
+
+  _addCart(){
+    SharedPreferencesUtil.instance.getString(AppStrings.TOKEN)
+        .then((value) {
+      if (value != null) {
+        _cartViewModel
+            .addCart(_model.goodDetailModel!.info!.id!,
+            _model.specificationId, _number)
+            .then((response) {
+          if (response) {
+            Navigator.of(context).pop(); //隐藏弹出框
+          }
+        });
+      } else {
+        NavigatorUtil.goLogin(context);
+      }
+    });
+  }
+
 }

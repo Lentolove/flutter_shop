@@ -7,6 +7,7 @@ import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/constant/text_style.dart';
 import 'package:flutter_shop/ui/widgets/divider_line.dart';
 import 'package:flutter_shop/ui/widgets/icon_text_arrow_view.dart';
+import 'package:flutter_shop/utils/shared_preferences_util.dart';
 import 'package:flutter_shop/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,6 @@ class TabMinePage extends StatefulWidget {
 }
 
 class _TabMinePageState extends State<TabMinePage> {
-
   double dimens80 = ScreenUtil().setWidth(AppDimens.DIMENS_80);
   double dimens30 = ScreenUtil().setWidth(AppDimens.DIMENS_30);
   double dimens20 = ScreenUtil().setWidth(AppDimens.DIMENS_20);
@@ -316,6 +316,7 @@ class _TabMinePageState extends State<TabMinePage> {
       child: ElevatedButton(
         onPressed: () {
           //todo 退出登录
+          _logout();
         },
         style: ButtonStyle(
             shape: MaterialStateProperty.all(
@@ -324,5 +325,42 @@ class _TabMinePageState extends State<TabMinePage> {
         child: Text(AppStrings.LOGOUT, style: FMTextStyle.color_ffffff_size_42),
       ),
     );
+  }
+
+  //退出登录弹窗提示
+  _logout() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title:
+                Text(AppStrings.TIPS, style: FMTextStyle.color_333333_size_60),
+            content: Text(AppStrings.CONFIRM_LOGOUT,
+                style: FMTextStyle.color_333333_size_48),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(AppStrings.CANCEL,
+                      style: FMTextStyle.color_999999_size_42)),
+              TextButton(
+                  onPressed: () {
+                    SharedPreferencesUtil.instance.clear().then((value) {
+                      print(value);
+                      if (value) {
+                        Navigator.pop(context);
+                        Provider.of<UserViewModel>(context, listen: false)
+                            .refreshData();
+
+                        //todo 更新购物车界面 tabSelectBus.fire(TabSelectEvent(0));
+                      }
+                    });
+                  },
+                  child: Text(AppStrings.CONFIRM,
+                      style: FMTextStyle.color_ff5722_size_42)),
+            ],
+          );
+        });
   }
 }
