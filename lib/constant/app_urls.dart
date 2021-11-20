@@ -60,4 +60,12 @@ class AppUrls {
 
   static const String MINE_ORDER_CANCEL=BASE_URL+"/order/cancel";//取消订单
 
+  static const String MINE_COUPON_LIST=BASE_URL+'/coupon/mylist';//所有优惠券
+
+  static const String RECEIVE_COUPON=BASE_URL+"/coupon/receive";//领取优惠券
+
+  static const String MINE_FOOTPRINT=BASE_URL+'/footprint/list';//足迹
+
+  static const String MINE_FOOTPRINT_DELETE=BASE_URL+'/footprint/delete';//删除足迹
+
 }

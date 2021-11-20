@@ -58,7 +58,7 @@ class Routers {
   static void configureRoutes(FluroRouter router) {
     router.notFoundHandler =
         Handler(handlerFunc: (context, Map<String, List<String>> parameters) {
-      return NotFoundPage();
+      return const NotFoundPage();
     });
     
     ///配置路由界面节点
@@ -81,7 +81,7 @@ class Routers {
 
     router.define(editAddress, handler: editAddressHandler);
 
-    // router.define(coupon, handler: couponHandler);
+    router.define(coupon, handler: couponHandler);
 
     // router.define(searchGoods, handler: searchGoodsHandler);
 
@@ -91,13 +91,13 @@ class Routers {
 
     // router.define(projectSelectionDetail, handler: projectSelectionDetailHandler);
 
-    // router.define(collect, handler: collectHandler);
+    router.define(collect, handler: collectHandler);
 
     // router.define(aboutUs, handler: aboutUsHandler);
 
     // router.define(feedBack, handler: feedBackHandler);
 
-    // router.define(footPrint, handler: footPrintHandler);
+    router.define(footPrint, handler: footPrintHandler);
 
     // router.define(submitSuccess, handler: submitSuccessHandler);
 

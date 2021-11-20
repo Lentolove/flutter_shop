@@ -75,6 +75,9 @@ dependencies:
   #城市列表选择器，中国的城市三级联动选择器： https://pub.dev/packages/city_pickers
   city_pickers: ^1.0.1
 
+  #常用估计类
+  common_utils: ^2.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

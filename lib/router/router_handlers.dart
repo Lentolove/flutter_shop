@@ -11,6 +11,9 @@ import 'package:flutter_shop/ui/page/login/register_page.dart';
 import 'package:flutter_shop/ui/page/main_page.dart';
 import 'package:flutter_shop/ui/page/mine/address_editing_page.dart';
 import 'package:flutter_shop/ui/page/mine/address_page.dart';
+import 'package:flutter_shop/ui/page/mine/collect_page.dart';
+import 'package:flutter_shop/ui/page/mine/coupon_page.dart';
+import 'package:flutter_shop/ui/page/mine/foot_print_page.dart';
 import 'package:flutter_shop/ui/page/mine/oder_detail_page.dart';
 import 'package:flutter_shop/ui/page/mine/order_page.dart';
 
@@ -84,4 +87,19 @@ var orderHandler = Handler(handlerFunc: (context, parameters) {
 var orderDetailHandler = Handler(handlerFunc: (context, parameters) {
   var orderId = int.parse(parameters["orderId"]!.first);
   return OrderDetailPage(orderId: orderId);
+});
+
+//优惠券列表界面
+var couponHandler = Handler(handlerFunc: (context, parameters) {
+  return const CouponPage();
+});
+
+//我的收藏界面
+var collectHandler = Handler(handlerFunc: (context, parameters) {
+  return const CollectPage();
+});
+
+//我的足迹
+var footPrintHandler = Handler(handlerFunc: (context, parameters) {
+  return const FootPrintPage();
 });

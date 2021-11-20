@@ -128,7 +128,7 @@ class _TabMinePageState extends State<TabMinePage> {
                   ],
                 ),
                 onTap: () => {
-                  // todo  跳转到优惠券界面
+                  NavigatorUtil.goCoupon(context)
                 },
               )),
           /*收藏*/
@@ -150,6 +150,7 @@ class _TabMinePageState extends State<TabMinePage> {
                   ),
                   onTap: () => {
                         // todo 跳转到收藏页面
+                    NavigatorUtil.goCollect(context)
                       })),
           /*我的足迹*/
           Expanded(
@@ -157,6 +158,7 @@ class _TabMinePageState extends State<TabMinePage> {
               child: InkWell(
                 onTap: () => {
                   //todo 跳转到我的足迹
+                  NavigatorUtil.goFootPrint(context)
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

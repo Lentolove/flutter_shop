@@ -3,6 +3,8 @@ import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/constant/app_urls.dart';
 import 'package:flutter_shop/model/address_model.dart';
 import 'package:flutter_shop/model/collection_model.dart';
+import 'package:flutter_shop/model/coupon_model.dart';
+import 'package:flutter_shop/model/foot_print_model.dart';
 import 'package:flutter_shop/model/order_detail_model.dart';
 import 'package:flutter_shop/model/order_list_model.dart';
 import 'package:flutter_shop/utils/http_util.dart';
@@ -232,6 +234,102 @@ class MineRepository {
     try {
       var response = await HttpUtil.instance.post(
         AppUrls.MINE_ORDER_CANCEL,
+        parameters: parameters,
+      );
+      if (response[AppStrings.ERR_NO] == 0) {
+        jsonResult.isSuccess = true;
+      } else {
+        jsonResult.isSuccess = false;
+        jsonResult.message = response[AppStrings.ERR_MSG] ?? AppStrings.SERVER_EXCEPTION;
+      }
+    } catch (e) {
+      jsonResult.isSuccess = false;
+      jsonResult.message = AppStrings.SERVER_EXCEPTION;
+    }
+    return jsonResult;
+  }
+
+
+
+  ///我的优惠券
+  Future<JsonResult<CouponModel>> queryCoupon(
+      Map<String, dynamic> parameters) async {
+    JsonResult<CouponModel> jsonResult = JsonResult<CouponModel>();
+    try {
+      var response = await HttpUtil.instance
+          .get(AppUrls.MINE_COUPON_LIST, parameters: parameters);
+      if (response[AppStrings.ERR_NO] == 0 &&
+          response[AppStrings.DATA] != null) {
+        CouponModel model =
+        CouponModel.fromJson(response[AppStrings.DATA]);
+        jsonResult.isSuccess = true;
+        jsonResult.data = model;
+      } else {
+        jsonResult.isSuccess = false;
+        jsonResult.message = response[AppStrings.ERR_MSG] ?? AppStrings.SERVER_EXCEPTION;
+      }
+    } catch (e) {
+      print(e);
+      jsonResult.isSuccess = false;
+      jsonResult.message = AppStrings.SERVER_EXCEPTION;
+    }
+    return jsonResult;
+  }
+
+  ///领取优惠券
+  Future<JsonResult<dynamic>> receiveCoupon(
+      Map<String, dynamic> parameters) async {
+    JsonResult<dynamic> jsonResult = JsonResult<dynamic>();
+    try {
+      var response = await HttpUtil.instance
+          .post(AppUrls.RECEIVE_COUPON, parameters: parameters);
+      if (response[AppStrings.ERR_NO] == 0 &&
+          response[AppStrings.DATA] != null) {
+        jsonResult.isSuccess = true;
+      } else {
+        jsonResult.isSuccess = false;
+        jsonResult.message = response[AppStrings.ERR_MSG] ?? AppStrings.SERVER_EXCEPTION;
+      }
+    } catch (e) {
+      jsonResult.isSuccess = false;
+      jsonResult.message = AppStrings.SERVER_EXCEPTION;
+    }
+    return jsonResult;
+  }
+
+
+  /// 足迹
+  Future<JsonResult<FootPrintModel>> queryFootPrint(
+      Map<String, dynamic> parameters) async {
+    JsonResult<FootPrintModel> jsonResult = JsonResult<FootPrintModel>();
+    try {
+      var response = await HttpUtil.instance.get(
+        AppUrls.MINE_FOOTPRINT,
+        parameters: parameters,
+      );
+      if (response[AppStrings.ERR_NO] == 0) {
+        FootPrintModel model =
+        FootPrintModel.fromJson(response[AppStrings.DATA]);
+        jsonResult.isSuccess = true;
+        jsonResult.data = model;
+      } else {
+        jsonResult.isSuccess = false;
+        jsonResult.message = response[AppStrings.ERR_MSG] ?? AppStrings.SERVER_EXCEPTION;
+      }
+    } catch (e) {
+      jsonResult.isSuccess = false;
+      jsonResult.message = AppStrings.SERVER_EXCEPTION;
+    }
+    return jsonResult;
+  }
+
+  ///删除足迹
+  Future<JsonResult<dynamic>> deleteFootPrint(
+      Map<String, dynamic> parameters) async {
+    JsonResult<dynamic> jsonResult = JsonResult<dynamic>();
+    try {
+      var response = await HttpUtil.instance.post(
+        AppUrls.MINE_FOOTPRINT_DELETE,
         parameters: parameters,
       );
       if (response[AppStrings.ERR_NO] == 0) {
