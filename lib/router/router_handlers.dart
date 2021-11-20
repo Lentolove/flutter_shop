@@ -9,6 +9,10 @@ import 'package:flutter_shop/ui/page/home_page.dart';
 import 'package:flutter_shop/ui/page/login/login_page.dart';
 import 'package:flutter_shop/ui/page/login/register_page.dart';
 import 'package:flutter_shop/ui/page/main_page.dart';
+import 'package:flutter_shop/ui/page/mine/address_editing_page.dart';
+import 'package:flutter_shop/ui/page/mine/address_page.dart';
+import 'package:flutter_shop/ui/page/mine/oder_detail_page.dart';
+import 'package:flutter_shop/ui/page/mine/order_page.dart';
 
 //引导页
 var splashHandler =
@@ -55,4 +59,29 @@ var registerHandler = Handler(handlerFunc: (context, parameters) {
 var fillInOrderHandler = Handler(handlerFunc: (context, parameters) {
   var cartId = int.parse(parameters[AppParameters.CART_ID]!.first);
   return FillInOrderPage(cartId: cartId);
+});
+
+//编辑地址界面
+var editAddressHandler = Handler(handlerFunc: (context, parameters) {
+  var addressId = int.parse(parameters["addressId"]!.first);
+  return AddressEditingPage(addressId: addressId);
+});
+
+//地址列表界面
+var addressHandler = Handler(handlerFunc: (context, parameters) {
+  var isSelect = int.parse(parameters["isSelect"]!.first);
+  return AddressPage(type: isSelect);
+});
+
+//订单列表界面
+var orderHandler = Handler(handlerFunc: (context, parameters) {
+  var initIndex =
+      int.parse(parameters.isEmpty ? "0" : parameters["initIndex"]!.first);
+  return OrderPage(initIndex: initIndex);
+});
+
+//订单详情
+var orderDetailHandler = Handler(handlerFunc: (context, parameters) {
+  var orderId = int.parse(parameters["orderId"]!.first);
+  return OrderDetailPage(orderId: orderId);
 });

@@ -37,6 +37,7 @@ class _TabCarPageState extends State<TabCarPage> {
   void initState() {
     super.initState();
     _cartViewModel = context.read<CartViewModel>();
+    _onRefresh(_cartViewModel);
     print("TabCarPage  initState");
   }
 

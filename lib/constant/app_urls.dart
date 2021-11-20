@@ -39,4 +39,25 @@ class AppUrls {
 
   static const String SUBMIT_ORDER=BASE_URL+ '/order/submit';// 提交订单
 
+
+  static const String COLLECT_ADD_DELETE=BASE_URL+ '/collect/addordelete'; //添加或取消收藏
+
+  static const String MINE_COLLECT=BASE_URL+ '/collect/list'; //收藏列表
+
+  static const String ADDRESS_LIST=BASE_URL+'/address/list';//地址列表
+
+  static const String ADDRESS_DETAIL=BASE_URL+'/address/detail';//地址详情
+
+  static const String ADDRESS_DELETE=BASE_URL+'/address/delete';//删除地址
+
+  static const String ADDRESS_SAVE=BASE_URL+'/address/save';//增加地址
+
+  static const String MINE_ORDER_DETAIL=BASE_URL+"/order/detail";//订单详情
+
+  static const String MINE_ORDERS=BASE_URL+'/order/list';//我的订单
+
+  static const String MINE_ORDER_DELETE=BASE_URL+"/order/delete";//删除订单
+
+  static const String MINE_ORDER_CANCEL=BASE_URL+"/order/cancel";//取消订单
+
 }

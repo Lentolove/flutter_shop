@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_shop/base/base_view_model.dart';
 import 'package:flutter_shop/base/page_state.dart';
 import 'package:flutter_shop/constant/app_parameters.dart';
@@ -38,6 +37,7 @@ class FillInOrderViewModel extends BaseViewModel {
             fillInOrderModel == null ? PageState.empty : PageState.hasData;
         notifyListeners();
       } else {
+        errorNotify(response.message);
         ToastUtil.showToast(response.message);
       }
     });

@@ -7,6 +7,7 @@ import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/constant/text_style.dart';
 import 'package:flutter_shop/ui/widgets/divider_line.dart';
 import 'package:flutter_shop/ui/widgets/icon_text_arrow_view.dart';
+import 'package:flutter_shop/utils/navigator_util.dart';
 import 'package:flutter_shop/utils/shared_preferences_util.dart';
 import 'package:flutter_shop/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
@@ -203,7 +204,7 @@ class _TabMinePageState extends State<TabMinePage> {
                             splashColor: AppColors.COLOR_FFFFFF,
                             highlightColor: AppColors.COLOR_FFFFFF,
                             onTap: () => {
-                              //todo 跳转到全部订单
+                              _goOrderPage(0)
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -234,10 +235,10 @@ class _TabMinePageState extends State<TabMinePage> {
                   _orderItem(
                       AppImages.TO_BE_DELIVERED, AppStrings.TO_BE_DELIVERED, 2),
                   //待发货
-                  _orderItem(AppImages.RECEIVED, AppStrings.TO_BE_RECEIVED, 1),
+                  _orderItem(AppImages.RECEIVED, AppStrings.TO_BE_RECEIVED, 3),
                   //待收货
                   _orderItem(
-                      AppImages.TO_BE_EVALUATED, AppStrings.TO_BE_EVALUATED, 1),
+                      AppImages.TO_BE_EVALUATED, AppStrings.TO_BE_EVALUATED, 4),
                   //待评价
                 ],
               ),
@@ -254,6 +255,7 @@ class _TabMinePageState extends State<TabMinePage> {
         child: GestureDetector(
           onTap: () {
             //todo 跳转到对应的界面
+            _goOrderPage(index);
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -288,6 +290,7 @@ class _TabMinePageState extends State<TabMinePage> {
                       title: AppStrings.LOCATION,
                       callback: () {
                         //todo 跳转到地址管理界面
+                        NavigatorUtil.goAddress(context, 0);
                       }),
                   const DividerLineView(),
                   IconTextArrowView(
@@ -362,5 +365,11 @@ class _TabMinePageState extends State<TabMinePage> {
             ],
           );
         });
+  }
+
+
+  //跳转到我的订单界面
+  _goOrderPage(int initIndex) {
+    NavigatorUtil.goOrderPage(context, initIndex);
   }
 }

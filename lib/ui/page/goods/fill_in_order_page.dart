@@ -21,7 +21,9 @@ import 'package:provider/provider.dart';
 class FillInOrderPage extends StatefulWidget {
   final int cartId;
 
-  const FillInOrderPage({Key? key, required this.cartId}) : super(key: key);
+  FillInOrderPage({Key? key, required this.cartId}) : super(key: key){
+    print("FillInOrderPage cartId = $cartId");
+  }
 
   @override
   _FillInOrderPageState createState() => _FillInOrderPageState();
@@ -46,12 +48,12 @@ class _FillInOrderPageState extends State<FillInOrderPage> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<FillInOrderViewModel>(
       create: (_) => _model,
-      child: Selector<FillInOrderViewModel, FillInOrderModel>(
+      child: Selector<FillInOrderViewModel, FillInOrderModel?>(
         builder: (context, model, child) {
           return _showWidget();
         },
-        selector: (context, model) {
-          return model.fillInOrderModel!;
+        selector: (BuildContext context,FillInOrderViewModel model) {
+          return model.fillInOrderModel;
         },
       ),
     );

@@ -77,9 +77,9 @@ class Routers {
     router.define(login, handler: loginHandler);
 
 
-    // router.define(address, handler: addressHandler);
+    router.define(address, handler: addressHandler);
 
-    // router.define(editAddress, handler: editAddressHandler);
+    router.define(editAddress, handler: editAddressHandler);
 
     // router.define(coupon, handler: couponHandler);
 
@@ -103,8 +103,8 @@ class Routers {
 
     // router.define(homeCategoryGoods, handler: homeCategoryGoodsHandler);
 
-    // router.define(orderPage, handler: orderHandler);
+    router.define(orderPage, handler: orderHandler);
 
-    // router.define(orderDetailPage, handler: orderDetailHandler);
+    router.define(orderDetailPage, handler: orderDetailHandler);
   }
 }

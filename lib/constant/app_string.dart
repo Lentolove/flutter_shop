@@ -189,11 +189,16 @@ class AppStrings{
   static const String ORDER_CANCEL_SYSTEM = "已取消(系统)";
   static const String ORDER_CANCEL_SUCCESSING = "订单取消，退款中";
   static const String ORDER_CANCEL_SUCCESS = "已退款";
+
+  static const String ORDER_STATUS = "订单状态";
+
   static const String ORDER_PAY = "已付款";
   static const String ORDER_SEND = "已发货";
   static const String ORDER_RECEIVE = "已收货";
   static const String ORDER_RECEIVE_SYSTEM = "已收货(系统)";
   static const String PLEASE_SELECT_FOOT_PRINT = "请选择需要删除的足迹";
   static const String DELETE_FOOT_PRINT_FAIL = "删除全部失败或者部分失败";
+
+
 
 }
