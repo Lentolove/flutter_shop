@@ -3,15 +3,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shop/base/page_state.dart';
 import 'package:flutter_shop/constant/app_colors.dart';
 import 'package:flutter_shop/constant/app_dimens.dart';
+import 'package:flutter_shop/constant/app_images.dart';
 import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/constant/text_style.dart';
 import 'package:flutter_shop/model/good_detail_model.dart';
+import 'package:flutter_shop/ui/widgets/cached_image.dart';
+import 'package:flutter_shop/ui/widgets/card_number.dart';
 import 'package:flutter_shop/ui/widgets/divider_line.dart';
 import 'package:flutter_shop/ui/widgets/page_status_widget.dart';
 import 'package:flutter_shop/utils/navigator_util.dart';
 import 'package:flutter_shop/utils/shared_preferences_util.dart';
+import 'package:flutter_shop/utils/toast_util.dart';
 import 'package:flutter_shop/view_model/cart_view_model.dart';
 import 'package:flutter_shop/view_model/good_detail_view_model.dart';
+import 'package:flutter_shop/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_html/flutter_html.dart';
 
@@ -28,7 +33,6 @@ class GoodDetailPage extends StatefulWidget {
 }
 
 class _GoodDetailPageState extends State<GoodDetailPage> {
-
   final GoodDetailViewModel _model = GoodDetailViewModel();
 
   late CartViewModel _cartViewModel;
@@ -60,7 +64,7 @@ class _GoodDetailPageState extends State<GoodDetailPage> {
             },
             selector: (context, model) {
               //todo 是否收藏
-              return true;
+              return _model.isCollection;
             },
           ),
         );
@@ -87,9 +91,10 @@ class _GoodDetailPageState extends State<GoodDetailPage> {
                 child: InkWell(
                   onTap: () {
                     //todo 收藏
+                    _collection();
                   },
                   child: Icon(
-                    Icons.star_border,
+                    Icons.star,
                     //根据是否收藏来显示不同的颜色
                     color: _model.isCollection
                         ? AppColors.COLOR_FF5722
@@ -121,11 +126,8 @@ class _GoodDetailPageState extends State<GoodDetailPage> {
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                           Radius.circular(AppDimens.DIMENS_30))),
-                  onPressed: (){
-                    //todo
-                    // openBottomSheet(
-                    //     context, _goodsDetailViewModel.goodsDetailEntity, 2),
-                    _addCart();
+                  onPressed: () {
+                    _openBottomSheet(context, _model.goodDetailModel!, 1);
                   },
                   child: Text(AppStrings.ADD_CART,
                       style: FMTextStyle.color_ffffff_size_42),
@@ -142,10 +144,8 @@ class _GoodDetailPageState extends State<GoodDetailPage> {
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                             Radius.circular(AppDimens.DIMENS_30))),
-                    onPressed: () => {
-                      //todo
-                      // openBottomSheet(
-                      //     context, _goodsDetailViewModel.goodsDetailEntity, 2),
+                    onPressed: () {
+                      _openBottomSheet(context, _model.goodDetailModel!, 2);
                     },
                     child: Text(AppStrings.BUY,
                         style: FMTextStyle.color_ffffff_size_42),
@@ -163,7 +163,6 @@ class _GoodDetailPageState extends State<GoodDetailPage> {
       return _dataView(model);
     } else {
       print(" no data");
-
       return PageStatusWidget.stateWidgetWithCallBack(model, () {
         //todo
       });
@@ -329,13 +328,208 @@ class _GoodDetailPageState extends State<GoodDetailPage> {
     );
   }
 
-  _addCart(){
-    SharedPreferencesUtil.instance.getString(AppStrings.TOKEN)
-        .then((value) {
+  ///打开底部弹窗
+  _openBottomSheet(BuildContext context, GoodDetailModel model, int showType) {
+    print("_openBottomSheet");
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SizedBox(
+            width: double.infinity,
+            height: ScreenUtil().setHeight(AppDimens.DIMENS_850),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.all(
+                      ScreenUtil().setWidth(AppDimens.DIMENS_30)),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      CachedImageView(
+                          ScreenUtil().setWidth(AppDimens.DIMENS_180),
+                          ScreenUtil().setWidth(AppDimens.DIMENS_180),
+                          model.info!.gallery![0]),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              left: ScreenUtil()
+                                  .setWidth(AppDimens.DIMENS_20))),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                              AppStrings.PRICE +
+                                  "：" +
+                                  "${model.info?.retailPrice}",
+                              style: FMTextStyle.color_333333_size_42),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: ScreenUtil()
+                                    .setHeight(AppDimens.DIMENS_20)),
+                          ),
+                          Text(
+                              AppStrings.ALREAD_SELECTED +
+                                  model.productList![0].specifications![0],
+                              style: FMTextStyle.color_333333_size_42),
+                        ],
+                      ),
+                      Expanded(
+                          child: Container(
+                              alignment: Alignment.centerRight,
+                              child: InkWell(
+                                onTap: () => Navigator.pop(context),
+                                child: Image.asset(
+                                  AppImages.CLOSE,
+                                  width: ScreenUtil()
+                                      .setWidth(AppDimens.DIMENS_60),
+                                  height: ScreenUtil()
+                                      .setWidth(AppDimens.DIMENS_60),
+                                ),
+                              ))),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      left: ScreenUtil().setWidth(AppDimens.DIMENS_30)),
+                  child: Text(AppStrings.SPECIFICATIONS,
+                      style: FMTextStyle.color_333333_size_42),
+                ),
+                ChangeNotifierProvider.value(
+                  value: _model,
+                  child: Selector<GoodDetailViewModel, int>(
+                      builder: (context, data, chile) {
+                        return Container(
+                          margin: EdgeInsets.only(
+                              left: ScreenUtil().setWidth(AppDimens.DIMENS_30)),
+                          child: Wrap(
+                              spacing: ScreenUtil().setWidth(AppDimens.DIMENS_20),
+                              children: _specificationsWidget(
+                                  _model.goodDetailModel!.specificationList,
+                                  data)),
+                        );
+                      }, selector: (context, model) {
+                    return model.specificationId!;
+                  }),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: ScreenUtil().setHeight(AppDimens.DIMENS_20)),
+                ),
+                Container(
+                    margin: EdgeInsets.all(
+                        ScreenUtil().setWidth(AppDimens.DIMENS_30)),
+                    child: Row(
+                      children: [
+                        Text(AppStrings.NUMBER,
+                            style: FMTextStyle.color_333333_size_42),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.all(
+                                ScreenUtil().setWidth(AppDimens.DIMENS_30)),
+                            alignment: Alignment.centerRight,
+                            child: CartNumberView(
+                              number: 1,
+                              callback: (value) {
+                                setState(() {
+                                  _number = value;
+                                });
+                                print(value);
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+                /*显示立即购买或加入购物车*/
+                Container(
+                  margin: EdgeInsets.only(
+                      bottom: ScreenUtil().setHeight(AppDimens.DIMENS_30),
+                      left: ScreenUtil().setWidth(AppDimens.DIMENS_30),
+                      right: ScreenUtil().setWidth(AppDimens.DIMENS_30)),
+                  child: SizedBox(
+                    height: ScreenUtil().setHeight(AppDimens.DIMENS_120),
+                    width: double.infinity,
+                    child: RaisedButton(
+                      color: showType == 1
+                          ? AppColors.COLOR_FF5722
+                          : AppColors.COLOR_FFB24E,
+                      onPressed: () => showType == 1 ? _addCart() : _buy(),
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(AppDimens.DIMENS_30))),
+                      child: Text(
+                          showType == 1
+                              ? AppStrings.ADD_CART
+                              : AppStrings.BUY,
+                          style: FMTextStyle.color_ffffff_size_42),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
+        });
+  }
+
+  ///购买商品
+  _buy() {
+    SharedPreferencesUtil.instance.getString(AppStrings.TOKEN).then((value) {
+      if (value != null) {
+        _model
+            .buy(_model.goodDetailModel!.info!.id!, _model.specificationId,
+                _number)
+            .then((response) {
+          if (response > 0) {
+            Navigator.of(context).pop(); //隐藏弹出框
+            NavigatorUtil.goFillInOrder(context, response);
+          } else {
+            ToastUtil.showToast(_cartViewModel.errorMessage);
+          }
+        });
+      } else {
+        NavigatorUtil.goLogin(context);
+      }
+    });
+  }
+
+  //商品特性
+  _specificationsWidget(
+      List<GoodDetailSpecificationList>? specifications, int specificationId) {
+    List<Widget> widgetList = [];
+    if (specifications == null || specifications.isEmpty) return widgetList;
+    for (var element in specifications) {
+      widgetList.add(ChoiceChip(
+        label: Text(element.name ?? "",
+            style: specificationId == element.valueList![0].id
+                ? FMTextStyle.color_ffffff_size_36
+                : FMTextStyle.color_333333_size_42),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+                Radius.circular(ScreenUtil().setWidth(AppDimens.DIMENS_60))),
+            side: BorderSide(
+              color: specificationId == element.valueList![0].id
+                  ? AppColors.COLOR_FF5722
+                  : AppColors.COLOR_999999,
+              width: ScreenUtil().setWidth(AppDimens.DIMENS_1),
+            )),
+        backgroundColor: AppColors.COLOR_FFFFFF,
+        selectedColor: AppColors.COLOR_FF5722,
+        selected: specificationId == element.valueList![0].id,
+        onSelected: (value) => {
+          if (value) {_model.setSpecificationId(element.valueList![0].id!)}
+        },
+      ));
+    }
+    return widgetList;
+  }
+
+  _addCart() {
+    SharedPreferencesUtil.instance.getString(AppStrings.TOKEN).then((value) {
       if (value != null) {
         _cartViewModel
-            .addCart(_model.goodDetailModel!.info!.id!,
-            _model.specificationId, _number)
+            .addCart(_model.goodDetailModel!.info!.id!, _model.specificationId,
+                _number)
             .then((response) {
           if (response) {
             Navigator.of(context).pop(); //隐藏弹出框
@@ -347,4 +541,15 @@ class _GoodDetailPageState extends State<GoodDetailPage> {
     });
   }
 
+  _collection() {
+    SharedPreferencesUtil.instance.getString(AppStrings.TOKEN).then((value) {
+      if (value == null) {
+        NavigatorUtil.goLogin(context);
+      } else {
+        _model.addOrDeleteCollect(widget.goodId).then((response) =>
+            Provider.of<UserViewModel>(context, listen: false)
+                .collectionDataChange());
+      }
+    });
+  }
 }

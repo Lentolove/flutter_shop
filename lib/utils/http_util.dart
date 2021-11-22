@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_shop/constant/app_string.dart';
+import 'package:flutter_shop/router/application.dart';
+import 'package:flutter_shop/router/router_path.dart';
 import 'package:flutter_shop/utils/shared_preferences_util.dart';
 
 ///数据请求单例类，工厂模式
@@ -44,7 +46,7 @@ class HttpUtil {
       print("code=${response.statusCode}");
       print("response=${response.data}");
       if (response.data[AppStrings.ERR_NO] == 501) {
-        // Application.navigatorKey.currentState.pushNamed(Routers.login);
+        Application.navigatorKey.currentState!.pushNamed(Routers.login);
         handler.reject(
             DioError(requestOptions: response.requestOptions, error: '未登录'));
       }

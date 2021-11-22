@@ -83,9 +83,9 @@ class Routers {
 
     router.define(coupon, handler: couponHandler);
 
-    // router.define(searchGoods, handler: searchGoodsHandler);
+    router.define(searchGoods, handler: searchGoodsHandler);
 
-    // router.define(webView, handler: webViewHandler);
+    router.define(webView, handler: webViewHandler);
 
     // router.define(brandDetail, handler: brandDetailHandler);
 

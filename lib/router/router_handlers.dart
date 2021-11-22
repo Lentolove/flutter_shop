@@ -5,6 +5,7 @@ import 'package:flutter_shop/ui/page/404/not_found_page.dart';
 import 'package:flutter_shop/ui/page/goods/category_googs_page.dart';
 import 'package:flutter_shop/ui/page/goods/fill_in_order_page.dart';
 import 'package:flutter_shop/ui/page/goods/good_detail_page.dart';
+import 'package:flutter_shop/ui/page/goods/search_goods_page.dart';
 import 'package:flutter_shop/ui/page/home_page.dart';
 import 'package:flutter_shop/ui/page/login/login_page.dart';
 import 'package:flutter_shop/ui/page/login/register_page.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_shop/ui/page/mine/coupon_page.dart';
 import 'package:flutter_shop/ui/page/mine/foot_print_page.dart';
 import 'package:flutter_shop/ui/page/mine/oder_detail_page.dart';
 import 'package:flutter_shop/ui/page/mine/order_page.dart';
+import 'package:flutter_shop/ui/widgets/webview_page.dart';
 
 //引导页
 var splashHandler =
@@ -102,4 +104,16 @@ var collectHandler = Handler(handlerFunc: (context, parameters) {
 //我的足迹
 var footPrintHandler = Handler(handlerFunc: (context, parameters) {
   return const FootPrintPage();
+});
+
+//webView视图
+var webViewHandler = Handler(handlerFunc: (context, parameters) {
+  var title = jsonDecode(parameters["titleName"]!.first);
+  var url = jsonDecode(parameters["url"]!.first);
+  return WebViewPage(bannerDetailUrl: url, bannerName: title);
+});
+
+//搜索界面
+var searchGoodsHandler = Handler(handlerFunc: (context, parameters) {
+  return const SearchGoodsPage();
 });

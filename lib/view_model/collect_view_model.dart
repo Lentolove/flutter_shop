@@ -29,9 +29,8 @@ class CollectViewModel extends BaseViewModel{
       if (response.isSuccess) {
         if (pageIndex == 1) {
           _collectionList.clear();
-        } else {
-          _collectionList.addAll(response.data?.xList ?? []);
         }
+        _collectionList.addAll(response.data?.xList ?? []);
         pageState = _collectionList.isEmpty ? PageState.empty : PageState.hasData;
         _canLoadMore = response.data!.total! > _collectionList.length;
         notifyListeners();

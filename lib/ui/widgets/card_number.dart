@@ -18,6 +18,14 @@ class CartNumberView extends StatefulWidget {
 }
 
 class _CartNumberViewState extends State<CartNumberView> {
+  var count = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    count = widget.number;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -53,7 +61,7 @@ class _CartNumberViewState extends State<CartNumberView> {
                     top: BorderSide(color: AppColors.COLOR_F0F0F0, width: 1.0),
                     bottom:
                         BorderSide(color: AppColors.COLOR_F0F0F0, width: 1.0))),
-            child: Text('${widget.number}',
+            child: Text('$count',
                 style: FMTextStyle.color_333333_size_42),
           ),
           InkWell(
@@ -82,13 +90,19 @@ class _CartNumberViewState extends State<CartNumberView> {
 
   ///减少
   _reduce() {
-    if (widget.number > 1) {
-      widget.callback(widget.number - 1);
+    if (count > 1) {
+      setState(() {
+        count -= 1;
+      });
+      widget.callback(count);
     }
   }
 
   ///增加
   _add() {
-    widget.callback(widget.number + 1);
+    setState(() {
+      count += 1;
+    });
+    widget.callback(count);
   }
 }

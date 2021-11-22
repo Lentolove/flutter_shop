@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shop/constant/app_colors.dart';
-import 'package:flutter_shop/constant/app_dimens.dart';
 import 'package:flutter_shop/ui/page/tab_car_page.dart';
 import 'package:flutter_shop/ui/page/tab_category_page.dart';
 import 'package:flutter_shop/ui/page/tab_mine_page.dart';
@@ -9,9 +7,6 @@ import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/ui/page/tabhome/tab_home_page.dart';
 import 'package:flutter_shop/utils/navigator_util.dart';
 import 'package:flutter_shop/utils/shared_preferences_util.dart';
-
-import 'login/login_page.dart';
-import 'login/register_page.dart';
 
 ///首页，管理四个页面的切换
 class HomePage extends StatefulWidget {
@@ -31,11 +26,10 @@ class _HomePageState extends State<HomePage> {
     print("HomePage  initState");
     super.initState();
     _pageList
-      ..add(TabHomePage())
-      ..add(TabCategory())
-      ..add(TabCarPage())
-      ..add(TabMinePage());
-    // ..add(LoginPage());
+      ..add(const TabHomePage())
+      ..add(const TabCategory())
+      ..add(const TabCarPage())
+      ..add(const TabMinePage());
   }
 
   @override

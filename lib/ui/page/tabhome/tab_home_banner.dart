@@ -5,6 +5,7 @@ import 'package:flutter_shop/constant/app_dimens.dart';
 import 'package:flutter_shop/constant/app_images.dart';
 import 'package:flutter_shop/model/home_model.dart';
 import 'package:flutter_shop/ui/widgets/cached_image.dart';
+import 'package:flutter_shop/utils/navigator_util.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 ///TabHome 首页顶部的轮播图
@@ -26,6 +27,8 @@ class TabHomeBanner extends StatelessWidget {
           : Swiper(
               onTap: (index) {
                 //todo
+                NavigatorUtil.goWebView(
+                    context, bannerData[index].name!, bannerData[index].link!);
               },
               itemCount: bannerData.length,
               scrollDirection: Axis.horizontal,

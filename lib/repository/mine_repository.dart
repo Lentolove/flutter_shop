@@ -345,4 +345,28 @@ class MineRepository {
     return jsonResult;
   }
 
+
+  ///快速购买
+  Future<JsonResult<dynamic>> buy(Map<String, dynamic> parameters) async {
+    JsonResult<dynamic> jsonResult = JsonResult<dynamic>();
+    try {
+      var response = await HttpUtil.instance.post(
+        AppUrls.FAST_BUY,
+        parameters: parameters,
+      );
+      if (response[AppStrings.ERR_NO] == 0 &&
+          response[AppStrings.DATA] != null) {
+        jsonResult.isSuccess = true;
+        jsonResult.data = response[AppStrings.DATA];
+      } else {
+        jsonResult.isSuccess = false;
+        jsonResult.message = response[AppStrings.ERR_MSG] ?? AppStrings.SERVER_EXCEPTION;
+      }
+    } catch (e) {
+      jsonResult.isSuccess = false;
+      jsonResult.message = AppStrings.SERVER_EXCEPTION;
+    }
+    return jsonResult;
+  }
+
 }

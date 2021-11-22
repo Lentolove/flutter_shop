@@ -39,6 +39,7 @@ class AppUrls {
 
   static const String SUBMIT_ORDER=BASE_URL+ '/order/submit';// 提交订单
 
+  static const String FAST_BUY=BASE_URL+'/cart/fastadd';//立即购买
 
   static const String COLLECT_ADD_DELETE=BASE_URL+ '/collect/addordelete'; //添加或取消收藏
 

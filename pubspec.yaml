@@ -78,6 +78,9 @@ dependencies:
   #常用估计类
   common_utils: ^2.0.2
 
+  #webview 插件
+  webview_flutter: ^2.0.10
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

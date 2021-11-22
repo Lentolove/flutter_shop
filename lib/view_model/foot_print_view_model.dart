@@ -39,9 +39,8 @@ class FootPrintViewModel extends BaseViewModel{
         _footPrintModel = response.data;
         if (pageIndex == 1) {
           _footList.clear();
-        } else {
-          _footList.addAll(_footPrintModel!.xList ?? []);
         }
+        _footList.addAll(_footPrintModel!.xList ?? []);
         _canLoadMore = _footList.length < _footPrintModel!.total!;
         pageState = _footList.isEmpty ? PageState.empty : PageState.hasData;
         notifyListeners();

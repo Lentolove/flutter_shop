@@ -34,6 +34,7 @@ class _CollectPageState extends State<CollectPage> {
   @override
   void initState() {
     super.initState();
+    print("initState CollectPage");
     _collectViewModel.queryData(_pageIndex, _pageSize);
   }
 
@@ -70,7 +71,6 @@ class _CollectPageState extends State<CollectPage> {
             left: ScreenUtil().setWidth(AppDimens.DIMENS_30),
             right: ScreenUtil().setWidth(AppDimens.DIMENS_30)),
         child: SmartRefresher(
-          enablePullDown: true,
           onRefresh: () => _onRefresh(),
           onLoading: () => _onLoadMores(),
           enablePullUp: model.canLoadMore,

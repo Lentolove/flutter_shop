@@ -9,6 +9,7 @@ import 'package:flutter_shop/ui/page/tabhome/tab_home_coupon.dart';
 import 'package:flutter_shop/ui/page/tabhome/tab_home_goods_category.dart';
 import 'package:flutter_shop/ui/page/tabhome/tab_home_group.dart';
 import 'package:flutter_shop/ui/page/tabhome/tab_home_topic.dart';
+import 'package:flutter_shop/utils/navigator_util.dart';
 import 'package:flutter_shop/view_model/tab_home_view_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:provider/provider.dart';
@@ -149,6 +150,7 @@ class _TabHomePageState extends State<TabHomePage>
         IconButton(
           onPressed: () {
             //todo 跳转到搜搜界面
+            NavigatorUtil.goSearchGoods(context);
           },
           icon: const Icon(
             Icons.search,
