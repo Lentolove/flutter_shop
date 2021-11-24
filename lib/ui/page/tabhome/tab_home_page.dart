@@ -9,6 +9,7 @@ import 'package:flutter_shop/ui/page/tabhome/tab_home_coupon.dart';
 import 'package:flutter_shop/ui/page/tabhome/tab_home_goods_category.dart';
 import 'package:flutter_shop/ui/page/tabhome/tab_home_group.dart';
 import 'package:flutter_shop/ui/page/tabhome/tab_home_topic.dart';
+import 'package:flutter_shop/ui/widgets/search_bar.dart';
 import 'package:flutter_shop/utils/navigator_util.dart';
 import 'package:flutter_shop/view_model/tab_home_view_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -107,23 +108,30 @@ class _TabHomePageState extends State<TabHomePage>
     }
 
     //品牌专享
-    if(model.homeModel!.brandList!.isNotEmpty){
-      list.add(TabHomeBrand(brandList: model.homeModel!.brandList!, title: AppStrings.MANUFACTURING));
+    if (model.homeModel!.brandList!.isNotEmpty) {
+      list.add(TabHomeBrand(
+          brandList: model.homeModel!.brandList!,
+          title: AppStrings.MANUFACTURING));
     }
 
     //新品
-    if(model.homeModel!.newGoodsList!.isNotEmpty){
-      list.add(TabHomeGoods(goodList :model.homeModel!.newGoodsList!,title: AppStrings.NEW_PRODUCTS));
+    if (model.homeModel!.newGoodsList!.isNotEmpty) {
+      list.add(TabHomeGoods(
+          goodList: model.homeModel!.newGoodsList!,
+          title: AppStrings.NEW_PRODUCTS));
     }
 
     //热销产品
-    if(model.homeModel!.hotGoodsList!.isNotEmpty){
-      list.add(TabHomeGoods(goodList :model.homeModel!.hotGoodsList!,title: AppStrings.HOT_SALE));
+    if (model.homeModel!.hotGoodsList!.isNotEmpty) {
+      list.add(TabHomeGoods(
+          goodList: model.homeModel!.hotGoodsList!,
+          title: AppStrings.HOT_SALE));
     }
 
     //专题精选
-    if(model.homeModel!.topicList!.isNotEmpty){
-      list.add(TabHomeTopic(title: AppStrings.SPECIAL, topicList: model.homeModel!.topicList!));
+    if (model.homeModel!.topicList!.isNotEmpty) {
+      list.add(TabHomeTopic(
+          title: AppStrings.SPECIAL, topicList: model.homeModel!.topicList!));
     }
 
     //分类产品
@@ -161,6 +169,39 @@ class _TabHomePageState extends State<TabHomePage>
       title: const Text(AppStrings.APP_NAME),
       centerTitle: true,
     );
+  }
+
+  _searchBar() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+      height: 80,
+      decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 255, 255, 255)),
+      child: SearchBar(
+        hideLeft: false,
+        inputBoxClick: _jumpToSearch(),
+        speakClick: _jumpToSpeak(),
+        defaultText: AppStrings.SEARCH_HIDE,
+        leftButtonClick: _jumpBack,
+        rightButtonClick: () {
+
+        },
+        onChanged: (String value) {
+
+        },
+      ),
+    );
+  }
+  _jumpToSearch(){
+
+  }
+
+  _jumpToSpeak(){
+
+  }
+
+  _jumpBack(){
+
   }
 
   ///获取首页数据

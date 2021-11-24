@@ -1,7 +1,7 @@
 class AppStrings{
 
   static const String OPEN_DOOR = "开启购物之旅";
-  static const String APP_NAME = "Flutter Mall Plus";
+  static const String APP_NAME = "Flutter Shop";
   static const String TOKEN = "X-Litemall-Token";
   static const String NICK_NAME = "NICK_NAME";
   static const String HEAD_URL = "HEAD_URL";
@@ -199,6 +199,6 @@ class AppStrings{
   static const String PLEASE_SELECT_FOOT_PRINT = "请选择需要删除的足迹";
   static const String DELETE_FOOT_PRINT_FAIL = "删除全部失败或者部分失败";
 
-
+  static const String SEARCH_HIDE = "输入商品关键字";
 
 }

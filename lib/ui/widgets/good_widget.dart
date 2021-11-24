@@ -21,7 +21,7 @@ class GoodWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double dimens400 = ScreenUtil().setHeight(AppDimens.DIMENS_400);
+    double dimens360 = ScreenUtil().setHeight(AppDimens.DIMENS_360);
     double dimens20 = ScreenUtil().setHeight(AppDimens.DIMENS_20);
     return GestureDetector(
       onTap: () {
@@ -33,8 +33,8 @@ class GoodWidget extends StatelessWidget {
           child: Column(
             children: [
               CachedImageView(
-                dimens400,
-                dimens400,
+                dimens360,
+                dimens360,
                 good.picUrl!,
               ),
               Padding(

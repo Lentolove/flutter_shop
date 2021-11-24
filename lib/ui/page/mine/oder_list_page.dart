@@ -5,6 +5,7 @@ import 'package:flutter_shop/constant/app_colors.dart';
 import 'package:flutter_shop/constant/app_dimens.dart';
 import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/constant/text_style.dart';
+import 'package:flutter_shop/event/order_refresh_event.dart';
 import 'package:flutter_shop/model/order_detail_model.dart';
 import 'package:flutter_shop/model/order_list_model.dart';
 import 'package:flutter_shop/ui/widgets/divider_line.dart';
@@ -48,6 +49,11 @@ class _OrderListPageState extends State<OrderListPage>
 
   @override
   Widget build(BuildContext context) {
+    orderEventBus.on<OrderRefreshEvent>().listen((event) {
+      _pageIndex = 1;
+      _pageSize = 20;
+      _orderViewModel.queryOrder(widget.showType, _pageIndex, _pageSize);
+    });
     return Material(
         child: ChangeNotifierProvider(
             create: (_) => _orderViewModel,
@@ -365,7 +371,7 @@ class _OrderListPageState extends State<OrderListPage>
   _cancelOrder(int orderId) {
     _orderViewModel.cancelOrder(orderId).then((value) {
       if (value) {
-        //todo orderEventBus.fire(OrderRefreshEvent());
+         orderEventBus.fire(OrderRefreshEvent());
         Navigator.pop(context);
       }
     });
@@ -375,8 +381,7 @@ class _OrderListPageState extends State<OrderListPage>
   _deleteOrder(int orderId) {
     _orderViewModel.deleteOrder(orderId).then((value) {
       if (value) {
-        //todo
-        // orderEventBus.fire(OrderRefreshEvent());
+        orderEventBus.fire(OrderRefreshEvent());
         Navigator.pop(context);
       }
     });

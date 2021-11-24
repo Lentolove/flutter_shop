@@ -6,6 +6,7 @@ import 'package:flutter_shop/ui/page/goods/category_googs_page.dart';
 import 'package:flutter_shop/ui/page/goods/fill_in_order_page.dart';
 import 'package:flutter_shop/ui/page/goods/good_detail_page.dart';
 import 'package:flutter_shop/ui/page/goods/search_goods_page.dart';
+import 'package:flutter_shop/ui/page/goods/submit_success_page.dart';
 import 'package:flutter_shop/ui/page/home_page.dart';
 import 'package:flutter_shop/ui/page/login/login_page.dart';
 import 'package:flutter_shop/ui/page/login/register_page.dart';
@@ -20,21 +21,18 @@ import 'package:flutter_shop/ui/page/mine/order_page.dart';
 import 'package:flutter_shop/ui/widgets/webview_page.dart';
 
 //引导页
-var splashHandler =
-    Handler(handlerFunc: (context, Map<String, List<String>> parameters) {
-  return MainPage();
+var splashHandler = Handler(handlerFunc: (context, parameters) {
+  return const MainPage();
 });
 
 //首页
-var homeHandler =
-    Handler(handlerFunc: (context, Map<String, List<String>> parameters) {
-  return HomePage();
+var homeHandler = Handler(handlerFunc: (context, parameters) {
+  return const HomePage();
 });
 
 //404页面
-var notFindHandler =
-    Handler(handlerFunc: (context, Map<String, List<String>> parameters) {
-  return NotFoundPage();
+var notFindHandler = Handler(handlerFunc: (context, parameters) {
+  return const NotFoundPage();
 });
 
 // 分类页面的二级页面的跳转页面,分类商品列表页
@@ -116,4 +114,9 @@ var webViewHandler = Handler(handlerFunc: (context, parameters) {
 //搜索界面
 var searchGoodsHandler = Handler(handlerFunc: (context, parameters) {
   return const SearchGoodsPage();
+});
+
+//提交订单
+var submitSuccessHandler = Handler(handlerFunc: (context, parameters) {
+  return const SubmitSuccessPage();
 });

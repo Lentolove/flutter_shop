@@ -14,21 +14,23 @@ class AppColors {
   static const Color COLOR_EFF21 = Color(0xFF7eff21);
   static const Color COLOR_DCDCDC = Color(0xFFDCDCDC);
   static const Color COLOR_FFB24E=Color(0xFFFFB24E);
+  static const Color COLOR_FFBF86=Color(0xFFFFBF86);
   static const Color COLOR_EAEAEA=Color(0xFFEAEAEA);
+  static const Color COLOR_ED2AA=Color(0xffFED2AA);
   static const Color COLOR_TRANSPARENT = Colors.transparent;
   static const MaterialColor themeColor = MaterialColor(
-    0xffff5722,
+    0xffFED2AA,
     <int, Color>{
-      50: Color(0xffff5722),
-      100: Color(0xffff5722),
-      200: Color(0xffff5722),
-      300: Color(0xffff5722),
-      400: Color(0xffff5722),
-      500: Color(0xffff5722),
-      600: Color(0xffff5722),
-      700: Color(0xffff5722),
-      800: Color(0xffff5722),
-      900: Color(0xffff5722),
+      50: Color(0xffFED2AA),
+      100: Color(0xffFED2AA),
+      200: Color(0xffFED2AA),
+      300: Color(0xffFED2AA),
+      400: Color(0xffFED2AA),
+      500: Color(0xffFED2AA),
+      600: Color(0xffFED2AA),
+      700: Color(0xffFED2AA),
+      800: Color(0xffFED2AA),
+      900: Color(0xffFED2AA),
     },
   );
 }

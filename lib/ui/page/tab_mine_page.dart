@@ -5,6 +5,7 @@ import 'package:flutter_shop/constant/app_dimens.dart';
 import 'package:flutter_shop/constant/app_images.dart';
 import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/constant/text_style.dart';
+import 'package:flutter_shop/event/tab_select_event.dart';
 import 'package:flutter_shop/ui/widgets/divider_line.dart';
 import 'package:flutter_shop/ui/widgets/icon_text_arrow_view.dart';
 import 'package:flutter_shop/utils/navigator_util.dart';
@@ -50,7 +51,7 @@ class _TabMinePageState extends State<TabMinePage> {
           decoration: BoxDecoration(
               //设置渐变色
               gradient: const LinearGradient(
-                  colors: [AppColors.COLOR_FFB24E, AppColors.COLOR_FF5722]),
+                  colors: [AppColors.COLOR_FFB24E, AppColors.COLOR_FFBF86]),
               color: AppColors.COLOR_FF5722,
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(dimens80),
@@ -326,7 +327,7 @@ class _TabMinePageState extends State<TabMinePage> {
         style: ButtonStyle(
             shape: MaterialStateProperty.all(
                 BeveledRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            backgroundColor: MaterialStateProperty.all(AppColors.COLOR_FF5722)),
+            backgroundColor: MaterialStateProperty.all(AppColors.COLOR_FFBF86)),
         child: Text(AppStrings.LOGOUT, style: FMTextStyle.color_ffffff_size_42),
       ),
     );
@@ -357,8 +358,7 @@ class _TabMinePageState extends State<TabMinePage> {
                         Navigator.pop(context);
                         Provider.of<UserViewModel>(context, listen: false)
                             .refreshData();
-
-                        //todo 更新购物车界面 tabSelectBus.fire(TabSelectEvent(0));
+                        tabSelectBus.fire(TabSelectEvent(0));
                       }
                     });
                   },

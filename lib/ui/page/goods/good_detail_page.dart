@@ -453,7 +453,7 @@ class _GoodDetailPageState extends State<GoodDetailPage> {
                     child: RaisedButton(
                       color: showType == 1
                           ? AppColors.COLOR_FF5722
-                          : AppColors.COLOR_FFB24E,
+                          : AppColors.COLOR_FF5722,
                       onPressed: () => showType == 1 ? _addCart() : _buy(),
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(

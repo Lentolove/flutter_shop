@@ -6,6 +6,7 @@ import 'package:flutter_shop/constant/app_dimens.dart';
 import 'package:flutter_shop/constant/app_images.dart';
 import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/constant/text_style.dart';
+import 'package:flutter_shop/event/order_refresh_event.dart';
 import 'package:flutter_shop/model/order_detail_model.dart';
 import 'package:flutter_shop/ui/widgets/divider_line.dart';
 import 'package:flutter_shop/ui/widgets/item_text.dart';
@@ -385,7 +386,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   _cancelOrder(int orderId) {
     _orderViewModel.cancelOrder(orderId).then((value) {
       if (value) {
-        //todo orderEventBus.fire(OrderRefreshEvent());
+        orderEventBus.fire(OrderRefreshEvent());
         Navigator.pop(context);
       }
     });
@@ -395,7 +396,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   _deleteOrder(int orderId) {
     _orderViewModel.deleteOrder(orderId).then((value) {
       if (value) {
-       //todo  orderEventBus.fire(OrderRefreshEvent());
+        orderEventBus.fire(OrderRefreshEvent());
         Navigator.pop(context);
       }
     });

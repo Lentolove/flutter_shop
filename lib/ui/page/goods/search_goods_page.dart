@@ -6,6 +6,7 @@ import 'package:flutter_shop/constant/app_dimens.dart';
 import 'package:flutter_shop/constant/app_string.dart';
 import 'package:flutter_shop/constant/text_style.dart';
 import 'package:flutter_shop/model/home_model.dart';
+import 'package:flutter_shop/model/search_good_model.dart';
 import 'package:flutter_shop/ui/widgets/good_widget.dart';
 import 'package:flutter_shop/ui/widgets/loading_dialog.dart';
 import 'package:flutter_shop/ui/widgets/page_status_widget.dart';
@@ -30,9 +31,9 @@ class _SearchGoodsPageState extends State<SearchGoodsPage> {
 
   final RefreshController _refreshController = RefreshController();
 
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
   var _pageIndex = 1;
-  var _pageSize = 10;
+  final _pageSize = 10;
   var _sortName = AppStrings.SORT_NAME;
   var _orderType = AppStrings.DESC;
 
@@ -46,7 +47,7 @@ class _SearchGoodsPageState extends State<SearchGoodsPage> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SearchGoodViewModel>(
         create: (_) => _searchGoodViewModel,
-        child: Selector<SearchGoodViewModel, List<GoodsModel>>(
+        child: Selector<SearchGoodViewModel, SearchGoodsModel?>(
           builder: (context, model, child) {
             if (_searchGoodViewModel.isLoadMore) {
               _pageIndex++;
@@ -65,7 +66,7 @@ class _SearchGoodsPageState extends State<SearchGoodsPage> {
               body: _contentWidget(),
             );
           },
-          selector: (context, model) => model.goodList,
+          selector: (context, model) => model.searchGoodsModel,
         ));
   }
 
@@ -141,7 +142,7 @@ class _SearchGoodsPageState extends State<SearchGoodsPage> {
           top: ScreenUtil().setHeight(AppDimens.DIMENS_30),
           bottom: ScreenUtil().setHeight(AppDimens.DIMENS_30)),
       alignment: Alignment.center,
-      color: AppColors.COLOR_FF5722,
+      color: AppColors.COLOR_ED2AA,
       child: Container(
           margin: EdgeInsets.only(
               right: ScreenUtil().setWidth(AppDimens.DIMENS_100)),
@@ -163,7 +164,7 @@ class _SearchGoodsPageState extends State<SearchGoodsPage> {
               prefixIcon: Icon(
                 Icons.search,
                 size: ScreenUtil().setWidth(AppDimens.DIMENS_80),
-                color: AppColors.COLOR_FF5722,
+                color: AppColors.COLOR_FFBF86,
               ),
               hintText: AppStrings.GOODS_SEARCH_HINT,
               hintStyle: FMTextStyle.color_999999_size_42,
@@ -364,8 +365,8 @@ class _SearchGoodsPageState extends State<SearchGoodsPage> {
 
   @override
   void dispose() {
-    _keyController.dispose();
-    _refreshController.dispose();
+    // _keyController.dispose();
+    // _refreshController.dispose();
     super.dispose();
   }
 }

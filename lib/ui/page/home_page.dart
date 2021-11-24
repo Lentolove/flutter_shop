@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/constant/app_colors.dart';
+import 'package:flutter_shop/event/tab_select_event.dart';
 import 'package:flutter_shop/ui/page/tab_car_page.dart';
 import 'package:flutter_shop/ui/page/tab_category_page.dart';
 import 'package:flutter_shop/ui/page/tab_mine_page.dart';
@@ -25,6 +26,13 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     print("HomePage  initState");
     super.initState();
+    SharedPreferencesUtil.instance.setBool(AppStrings.IS_FIRST, false);
+    tabSelectBus.on<TabSelectEvent>().listen((event) {
+      setState(() {
+        TabSelectEvent tabSelectEvent = event;
+        _selectedIndex = tabSelectEvent.selectIndex;
+      });
+    });
     _pageList
       ..add(const TabHomePage())
       ..add(const TabCategory())

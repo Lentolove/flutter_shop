@@ -47,8 +47,8 @@ class HttpUtil {
       print("response=${response.data}");
       if (response.data[AppStrings.ERR_NO] == 501) {
         Application.navigatorKey.currentState!.pushNamed(Routers.login);
-        handler.reject(
-            DioError(requestOptions: response.requestOptions, error: '未登录'));
+        // handler.reject(
+        //     DioError(requestOptions: response.requestOptions, error: '未登录'));
       }
       handler.next(response);
     }, onError: (e, handler) {

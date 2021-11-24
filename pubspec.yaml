@@ -81,6 +81,9 @@ dependencies:
   #webview 插件
   webview_flutter: ^2.0.10
 
+  #EventBus 插件
+  event_bus: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

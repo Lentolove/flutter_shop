@@ -209,7 +209,7 @@ class _AddressEditingPageState extends State<AddressEditingPage> {
             child: SizedBox(
                 width: ScreenUtil().setWidth(AppDimens.DIMENS_800),
                 child: InkWell(
-                    onTap: () => _show(context, model),
+                    onTap: () => _show(context),
                     child: Container(
                       alignment: Alignment.centerLeft,
                       height: ScreenUtil().setHeight(AppDimens.DIMENS_160),
@@ -229,7 +229,7 @@ class _AddressEditingPageState extends State<AddressEditingPage> {
   }
 
   //弹出地区选择器视图，引用城市选择插件:https://pub.dev/packages/city_pickers
-  _show(BuildContext context, AddressEditViewModel model) async {
+  _show(BuildContext context) async {
     Result? temp = await CityPickers.showCityPicker(
         context: context,
         itemExtent: ScreenUtil().setHeight(AppDimens.DIMENS_120),
@@ -321,7 +321,7 @@ class _AddressEditingPageState extends State<AddressEditingPage> {
                 alignment: Alignment.centerRight,
                 child: CupertinoSwitch(
                     value: model.isDefault,
-                    activeColor: AppColors.COLOR_FF5722,
+                    activeColor: AppColors.COLOR_FFBF86,
                     onChanged: (value) {
                       print(value);
                       model.setDefault(value, _nameController.text,
@@ -344,7 +344,7 @@ class _AddressEditingPageState extends State<AddressEditingPage> {
         width: double.infinity,
         child: RaisedButton(
           onPressed: () => _submit(model),
-          color: AppColors.COLOR_FF5722,
+          color: AppColors.COLOR_FFBF86,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(AppDimens.DIMENS_60),

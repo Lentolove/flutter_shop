@@ -342,7 +342,7 @@ class _FillInOrderPageState extends State<FillInOrderPage> {
               width: ScreenUtil().setWidth(AppDimens.DIMENS_300),
               height: double.infinity,
               child: RaisedButton(
-                color: AppColors.COLOR_FF5722,
+                color: AppColors.COLOR_FFBF86,
                 onPressed: () => _submitOrder(),
                 shape: const RoundedRectangleBorder(
                     borderRadius:
@@ -373,7 +373,6 @@ class _FillInOrderPageState extends State<FillInOrderPage> {
             _model.fillInOrderModel!.couponId!)
         .then((value) {
       if (value) {
-        //todo 跳转到下单成功的页面
         NavigatorUtil.goSubmitSuccess(context);
       }
     });

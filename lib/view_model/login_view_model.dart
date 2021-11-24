@@ -7,9 +7,7 @@ import 'package:flutter_shop/utils/toast_util.dart';
 import 'package:flutter_shop/view_model/user_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class LoginViewModel extends BaseViewModel {
-
   final UserRepository _repository = UserRepository();
 
   UserModel? _userModel;
@@ -18,7 +16,6 @@ class LoginViewModel extends BaseViewModel {
   UserViewModel userViewModel;
 
   LoginViewModel(this.userViewModel);
-
 
   Future<bool> login(String account, String passWord) async {
     bool result = false;
@@ -29,11 +26,11 @@ class LoginViewModel extends BaseViewModel {
     await _repository.login(parameters).then((response) {
       if (response.isSuccess) {
         _userModel = response.data;
-        _saveUserInfo();
+        _saveUserInfo(account, passWord);
         userViewModel.setUserInformation(
             _userModel!.userInfo!.avatarUrl!, _userModel!.userInfo!.nickName!);
-        notifyListeners();
         result = true;
+        notifyListeners();
       } else {
         result = false;
         ToastUtil.showToast(response.message);
@@ -43,7 +40,7 @@ class LoginViewModel extends BaseViewModel {
   }
 
   ///存储用户状态信息
-  _saveUserInfo() async {
+  _saveUserInfo(String account, String password) async {
     if (_userModel == null) return;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences
@@ -53,7 +50,8 @@ class LoginViewModel extends BaseViewModel {
         AppStrings.HEAD_URL, _userModel!.userInfo!.avatarUrl!);
     await sharedPreferences.setString(
         AppStrings.NICK_NAME, _userModel!.userInfo!.nickName!);
+    await sharedPreferences.setString("user_account", account);
+    await sharedPreferences.setString("user_password", password);
     sharedPreferences.commit();
   }
-
 }

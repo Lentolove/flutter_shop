@@ -7,15 +7,15 @@ import 'package:flutter_shop/utils/shared_preferences_util.dart';
 class UserViewModel extends BaseViewModel {
   final MineRepository _mineRepository = MineRepository();
 
-  bool _showTitle = false;
+  final bool _showTitle = false;
 
   String? _pictureUrl;
   String? _userName = "我是小xxx";
   int _collectionNumber = 0;
   int _footPrintfNumber = 0;
   int _couponNumber = 0;
-  int _page = 1;
-  int _limit = 20;
+  final int _page = 1;
+  final int _limit = 20;
   bool _isFirst = true;
 
   bool get showTitle => _showTitle;
@@ -40,6 +40,7 @@ class UserViewModel extends BaseViewModel {
     await SharedPreferencesUtil.instance
         .getString(AppStrings.TOKEN)
         .then((value) => token = value);
+    print("refreshData : token = $token");
     if (token != null && token!.isNotEmpty) {
       await SharedPreferencesUtil.instance
           .getString(AppStrings.NICK_NAME)
@@ -51,6 +52,12 @@ class UserViewModel extends BaseViewModel {
       await _queryCoupon();
       await _queryFootPrint();
       await _queryCollection();
+      await SharedPreferencesUtil.instance
+          .getBool(AppStrings.IS_FIRST)
+          .then((value) {
+        print("refreshData == $value");
+        _isFirst = value ??= true;
+      });
       notifyListeners();
     } else {
       await SharedPreferencesUtil.instance

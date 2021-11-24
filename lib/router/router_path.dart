@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter_shop/router/router_handlers.dart';
 import 'package:flutter_shop/ui/page/404/not_found_page.dart';
@@ -99,7 +98,7 @@ class Routers {
 
     router.define(footPrint, handler: footPrintHandler);
 
-    // router.define(submitSuccess, handler: submitSuccessHandler);
+    router.define(submitSuccess, handler: submitSuccessHandler);
 
     // router.define(homeCategoryGoods, handler: homeCategoryGoodsHandler);
 

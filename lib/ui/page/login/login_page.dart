@@ -7,6 +7,7 @@ import 'package:flutter_shop/constant/text_style.dart';
 import 'package:flutter_shop/ui/widgets/loading_dialog.dart';
 import 'package:flutter_shop/utils/navigator_util.dart';
 import 'package:flutter_shop/utils/toast_util.dart';
+import 'package:flutter_shop/view_model/cart_view_model.dart';
 import 'package:flutter_shop/view_model/login_view_model.dart';
 import 'package:flutter_shop/view_model/user_view_model.dart';
 import 'package:provider/src/provider.dart';
@@ -70,7 +71,7 @@ class LoginPage extends StatelessWidget {
                     decoration: InputDecoration(
                       icon: Icon(
                         Icons.person,
-                        color: AppColors.COLOR_FF5722,
+                        color: AppColors.COLOR_FFBF86,
                         size: ScreenUtil().setWidth(AppDimens.DIMENS_80),
                       ),
                       hintText: AppStrings.USERNAME_HINT,
@@ -93,7 +94,7 @@ class LoginPage extends StatelessWidget {
                     decoration: InputDecoration(
                       icon: Icon(
                         Icons.lock,
-                        color: AppColors.COLOR_FF5722,
+                        color: AppColors.COLOR_FFBF86,
                         size: ScreenUtil().setWidth(AppDimens.DIMENS_80),
                       ),
                       hintText: AppStrings.PASSWORD_HINT,
@@ -113,7 +114,7 @@ class LoginPage extends StatelessWidget {
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                                 Radius.circular(AppDimens.DIMENS_30))),
-                        color: AppColors.COLOR_FF5722,
+                        color: AppColors.COLOR_FFBF86,
                         onPressed: () {
                           //todo 跳转到登录界面
                           _login(context);
@@ -158,13 +159,16 @@ class LoginPage extends StatelessWidget {
       _showLoginDialog(context);
       _model.login(_accountController.text, _passWordController.text).then(
           (response) {
+            //存储用户名和密码
         Navigator.pop(context);
         if (!response) {
           Navigator.pop(context);
           ToastUtil.showToast(_model.errorMessage);
         } else {
           //更新登录的状态
-          context.watch<UserViewModel>().refreshData();
+          Provider.of<UserViewModel>(context, listen: false).refreshData();
+          Provider.of<CartViewModel>(context, listen: false).queryCart();
+          ToastUtil.showToast("登录成功");
           Navigator.pop(context);
         }
       }, onError: (error) {
@@ -172,6 +176,7 @@ class LoginPage extends StatelessWidget {
       });
     }
   }
+
 
   ///显示弹窗
   _showLoginDialog(BuildContext context) {
