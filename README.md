@@ -47,9 +47,7 @@
 
 >The brightest, hippest, coolest router for Flutter.
 
-### 8.[pull_to_refresh](https://pub.dev/packages/pull_to_refresh): ^2.0.0 下拉刷新插件
-
-### 9.[city_pickers](https://pub.dev/packages/city_pickers)：^1.0.1
+### 8.[city_pickers](https://pub.dev/packages/city_pickers)：^1.0.1
 
 >中国的城市三级联动选择器
 
